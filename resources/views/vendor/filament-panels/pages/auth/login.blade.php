@@ -16,15 +16,6 @@
             :actions="$this->getCachedFormActions()"
             :full-width="$this->hasFullWidthFormActions()"
         />
-
-        <hr/>
-
-        <x-filament::button
-            href="/0auth/google/redirect"
-            tag="a" color="gray" icon="heroicon-m-rocket-launch">
-            Sign in with Google
-        </x-filament::button>
-
     </x-filament-panels::form>
 
     {{ \Filament\Support\Facades\FilamentView::renderHook('panels::auth.login.form.after') }}

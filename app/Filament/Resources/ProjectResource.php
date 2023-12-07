@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use Closure;
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\Project;
@@ -12,25 +13,34 @@ use App\Enums\FundCategory;
 use App\Enums\ProjectStatus;
 use App\Enums\ProjectCategory;
 use Filament\Resources\Resource;
+use Tables\Actions\CreateAction;
 use Filament\Support\Colors\Color;
 use Filament\Forms\Components\Grid;
+use Filament\Tables\Filters\Filter;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Actions;
 use Filament\Forms\Components\Section;
+use Filament\Support\Enums\ActionSize;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
+use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Filters\TernaryFilter;
+use Filament\Tables\Filters\TrashedFilter;
+use Filament\Tables\Actions\BulkActionGroup;
+use Filament\Tables\Actions\DeleteBulkAction;
 use App\Filament\Resources\ProjectResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\ProjectResource\RelationManagers;
 
 class ProjectResource extends Resource
 {
@@ -91,8 +101,8 @@ class ProjectResource extends Resource
                                 TextInput::make('first_name')->required(),
                                 TextInput::make('last_name')->required(),
                                 Select::make('member_role')
-                                    ->options(MemberRole::array())->columnSpan(2),
-                            ])->columns(2)
+                                    ->options(MemberRole::class)->columnSpan(2),
+                            ])->columns(2),
                     ]),
 
                     Section::make('Attachments')
@@ -118,7 +128,7 @@ class ProjectResource extends Resource
                             ])
                             ->disk('local')
                             ->directory('/public/attachments')
-                        ->multiple()
+                        ->multiple(),
                     ])->columnSpan(2),// end Section 2
                 ])->columnSpan(['lg' => 2]),// end Group 1
 
@@ -167,7 +177,6 @@ class ProjectResource extends Resource
                     ])->columnSpan(2),
 
                 ])->columnSpan(['lg' => 1]),// end Group 2
-
             ])->columns(3);//end Schema
     }
 
@@ -240,8 +249,8 @@ class ProjectResource extends Resource
                     ),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ])
             ->emptyStateActions([

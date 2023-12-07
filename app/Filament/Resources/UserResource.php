@@ -9,8 +9,8 @@ use Filament\Tables;
 use App\Enums\UserRole;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
-use Filament\Actions\Action;
 use Filament\Resources\Resource;
+use Tables\Actions\CreateAction;
 use Filament\Support\Colors\Color;
 use Filament\Forms\Components\Grid;
 use Filament\Tables\Filters\Filter;
@@ -29,8 +29,6 @@ use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Filters\TrashedFilter;
 use App\Filament\Resources\UserResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\UserResource\RelationManagers;
-use Filament\Actions\CreateAction;
 
 
 class UserResource extends Resource
