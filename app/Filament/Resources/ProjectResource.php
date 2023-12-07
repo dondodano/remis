@@ -11,6 +11,7 @@ use App\Enums\FundCategory;
 use App\Enums\ProjectStatus;
 use App\Enums\ProjectCategory;
 use Filament\Resources\Resource;
+use Filament\Support\Colors\Color;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Select;
@@ -18,6 +19,7 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
@@ -79,7 +81,11 @@ class ProjectResource extends Resource
                     ->schema([
                         FileUpload::make('attachments')
                             ->label('Upload files here')
-                            ->preserveFilenames()
+                            ->downloadable()
+                            ->reorderable()
+                            ->appendFiles()
+                            ->openable()
+                            ->previewable(false)
                             ->acceptedFileTypes([
                                 'application/pdf',
                                 'image/jpeg',
@@ -90,9 +96,8 @@ class ProjectResource extends Resource
                                 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
                                 'application/x-zip-compressed'
                             ])
-                            ->disk('public')
-                            ->directory('attachments')
-                            ->downloadable()
+                            ->disk('local')
+                            ->directory('/public/attachments')
                         ->multiple()
                     ])->columnSpan(2),// end Section 2
                 ])->columnSpan(['lg' => 2]),// end Group 1
@@ -168,12 +173,12 @@ class ProjectResource extends Resource
                     ->circular()
                     ->stacked(),
                 TextColumn::make('start_at')
-                    ->label('Start Date')
-                    ->searchable()
-                    ->toggleable()
-                    ->sortable(),
-                TextColumn::make('end_at')
-                    ->label('End Date')
+                    ->label('Duration')
+                    ->badge()
+                    ->color(Color::Amber)
+                    ->formatStateUsing(function($state, Project $project){
+                        return date('Y-m-d', strtotime($project->start_at)) .' | '. date('Y-m-d', strtotime($project->end_at));
+                    })
                     ->searchable()
                     ->toggleable()
                     ->sortable(),
@@ -189,6 +194,8 @@ class ProjectResource extends Resource
                     ->sortable(),
                 TextColumn::make('project_status')
                     ->label('Status')
+                    ->badge()
+                    ->color(Color::Blue)
                     ->searchable()
                     ->toggleable()
                     ->sortable(),
@@ -197,7 +204,17 @@ class ProjectResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                ->label('')->color('gray')->tooltip('Edit user')
+                    //methods below can be executed when edit is on modal
+                    ->mutateFormDataUsing(function (array $data): array {
+                        return $data;
+                    })->successNotification(
+                        Notification::make()
+                            ->success()
+                            ->title('Project updated')
+                            ->body('The project has been saved successfully.'),
+                    ),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -224,7 +241,7 @@ class ProjectResource extends Resource
         return [
             'index' => Pages\ListProjects::route('/'),
             'create' => Pages\CreateProject::route('/create'),
-            'edit' => Pages\EditProject::route('/{record}/edit'),
+            //'edit' => Pages\EditProject::route('/{record}/edit'),
         ];
     }
 }

@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Enums\FundCategory;
+use App\Enums\ProjectStatus;
+use App\Enums\ProjectCategory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,6 +16,7 @@ class Project extends Model
     protected $fillable = [
         'title',
         'budget',
+        'attachments',
         'start_at',
         'end_at',
         'project_category',
@@ -21,6 +25,7 @@ class Project extends Model
     ];
 
     protected $casts = [
+        'attachments' => 'array',
         'project_category' => ProjectCategory::class,
         'fund_category' => FundCategory::class,
         'project_status' => ProjectStatus::class
