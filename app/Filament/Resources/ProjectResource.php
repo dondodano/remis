@@ -11,13 +11,14 @@ use App\Enums\MemberRole;
 use Filament\Tables\Table;
 use App\Enums\FundCategory;
 use App\Enums\ProjectStatus;
+use App\Models\ProjectMember;
 use App\Enums\ProjectCategory;
 use Filament\Resources\Resource;
 use Tables\Actions\CreateAction;
 use Filament\Support\Colors\Color;
 use Filament\Forms\Components\Grid;
 use Filament\Tables\Filters\Filter;
-use Filament\Forms\Components\Group;
+use Filament\Tables\Grouping\Group;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Actions;
 use Filament\Forms\Components\Section;
@@ -31,12 +32,14 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Filters\TrashedFilter;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteBulkAction;
 use App\Filament\Resources\ProjectResource\Pages;
@@ -98,11 +101,24 @@ class ProjectResource extends Resource
                     ->schema([
                         Repeater::make('members')
                             ->schema([
-                                TextInput::make('first_name')->required(),
-                                TextInput::make('last_name')->required(),
+                                TextInput::make('first_name')->autocapitalize()->required(),
+                                TextInput::make('last_name')->autocapitalize()->required(),
                                 Select::make('member_role')
+                                    ->default('member')
                                     ->options(MemberRole::class)->columnSpan(2),
                             ])
+                            ->mutateRelationshipDataBeforeCreateUsing(function (array $data, Project $project): array {
+                                $nameWithSpace = $data['first_name'].' '.$data['last_name'];
+                                $nameWithPlus = str_replace(' ', '+', $nameWithSpace);
+
+
+                                $data +=  [
+                                    'avatar' => 'https://ui-avatars.com/api/?background=random&size=128&rounded=true&bold=true&format=svg&name='.$nameWithPlus,
+                                    'project_id' => $project->id
+                                ];
+                                return $data;
+                            })
+                            ->reorderableWithButtons()
                             ->relationship()
                             ->columns(2),
                     ]),
@@ -188,42 +204,52 @@ class ProjectResource extends Resource
             ->columns([
                 TextColumn::make('title')
                     ->label('Title')
+                    ->size(TextColumn\TextColumnSize::ExtraSmall)
+                    ->wrap()
                     ->searchable()
                     ->toggleable()
                     ->sortable(),
                 TextColumn::make('budget')
                     ->label('Budget')
+                    ->money('PHP')
+                    ->size(TextColumn\TextColumnSize::ExtraSmall)
                     ->searchable()
                     ->toggleable()
                     ->sortable(),
-                ImageColumn::make('project_member')
+                ImageColumn::make('members.avatar')
                     ->label('Members')
                     ->circular()
-                    ->stacked(),
-                TextColumn::make('start_at')
+                    ->stacked()
+                    ->limit(3)
+                    ->ring(5)
+                    ->overlap(2)
+                    ->limitedRemainingText()
+                    ->checkFileExistence(false),
+                BadgeColumn::make('start_at')
                     ->label('Duration')
-                    ->badge()
                     ->color(Color::Amber)
                     ->formatStateUsing(function($state, Project $project){
                         return date('Y-m-d', strtotime($project->start_at)) .' | '. date('Y-m-d', strtotime($project->end_at));
                     })
+                    ->size(TextColumn\TextColumnSize::ExtraSmall)
                     ->searchable()
                     ->toggleable()
                     ->sortable(),
                 TextColumn::make('project_category')
                     ->label('Category')
+                    ->size(TextColumn\TextColumnSize::ExtraSmall)
                     ->searchable()
                     ->toggleable()
                     ->sortable(),
                 TextColumn::make('fund_category')
                     ->label('Fund')
+                    ->size(TextColumn\TextColumnSize::ExtraSmall)
                     ->searchable()
                     ->toggleable()
                     ->sortable(),
-                TextColumn::make('project_status')
+                BadgeColumn::make('project_status')
                     ->label('Status')
-                    ->badge()
-                    ->color(Color::Blue)
+                    ->colors(['primary'])
                     ->searchable()
                     ->toggleable()
                     ->sortable(),
