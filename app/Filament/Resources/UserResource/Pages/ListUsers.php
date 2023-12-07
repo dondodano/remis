@@ -47,7 +47,7 @@ class ListUsers extends ListRecords
 
     public function getDefaultActiveTab(): string | int | null
     {
-        return 'active';
+        return 'All';
     }
 
     protected function getHeaderWidgets(): array

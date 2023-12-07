@@ -16,15 +16,16 @@ use App\Enums\ProjectCategory;
 use Filament\Resources\Resource;
 use Tables\Actions\CreateAction;
 use Filament\Support\Colors\Color;
-use Filament\Forms\Components\Grid;
 use Filament\Tables\Filters\Filter;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Actions;
 use Filament\Forms\Components\Section;
 use Filament\Support\Enums\ActionSize;
+use Filament\Support\Enums\FontWeight;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Textarea;
+use Filament\Infolists\Components\Grid;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
@@ -40,11 +41,13 @@ use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Filters\TrashedFilter;
+use Filament\Infolists\Components\Fieldset;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteBulkAction;
 use App\Filament\Resources\ProjectResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+
 
 class ProjectResource extends Resource
 {
@@ -135,6 +138,7 @@ class ProjectResource extends Resource
                             ->appendFiles()
                             ->openable()
                             ->previewable(false)
+                            ->preserveFilenames()
                             ->acceptedFileTypes([
                                 'application/pdf',
                                 'image/jpeg',
@@ -146,7 +150,7 @@ class ProjectResource extends Resource
                                 'application/x-zip-compressed'
                             ])
                             ->disk('local')
-                            ->directory('/public/attachments')
+                            ->directory('/public/attachments/'. randomStr())
                         ->multiple(),
                     ])->columnSpan(2),// end Section 2
                 ])->columnSpan(['lg' => 2]),// end Group 1
@@ -267,8 +271,67 @@ class ProjectResource extends Resource
             ->actions([
                 ViewAction::make()
                 ->label('')->color('gray')->tooltip('View project')
-                    ->form([
+                    ->infolist([
+                        Grid::make(3)
+                            ->schema([
+                                TextEntry::make('title')
+                                    ->icon('heroicon-m-folder')
+                                    ->size(TextEntry\TextEntrySize::Medium)
+                                    ->weight(FontWeight::Bold)
+                                    ->label('Project Title')
+                                    ->columnSpan(3),
+                                TextEntry::make('budget')
+                                    ->icon('heroicon-m-banknotes')
+                                    ->label('Budget')
+                                    ->money('PHP')
+                                    ->badge()
+                                    ->color(Color::Blue),
+                                TextEntry::make('start_at')
+                                    ->icon('heroicon-m-calendar')
+                                    ->label('Budget')
+                                    ->money('PHP')
+                                    ->badge()
+                                    ->color(Color::Amber)
+                                    ->formatStateUsing(function($state, Project $project){
+                                        return date('Y-m-d', strtotime($project->start_at)) .' | '. date('Y-m-d', strtotime($project->end_at));
+                                    }),
+                                TextEntry::make('project_category')
+                                    ->icon('heroicon-m-tag')
+                                    ->badge()
+                                    ->color(Color::Blue)
+                                    ->label('Category'),
+                                TextEntry::make('fund_category')
+                                    ->icon('heroicon-m-tag')
+                                    ->badge()
+                                    ->color(Color::Green)
+                                    ->label('Fund'),
+                                TextEntry::make('project_status')
+                                    ->icon('heroicon-m-tag')
+                                    ->badge()
+                                    ->color(Color::Indigo)
+                                    ->label('Status'),
+                                TextEntry::make('members')
+                                    ->icon('heroicon-m-user-circle')
+                                    ->listWithLineBreaks()
+                                    ->formatStateUsing(function($state){
+                                        return ucwords($state->first_name .' '. $state->last_name);
+                                    }),
 
+                                Fieldset::make('Attachments')
+                                ->schema([
+                                    TextEntry::make('attachments')
+                                        ->label('')
+                                        ->icon('heroicon-m-bookmark')
+                                        ->listWithLineBreaks()
+                                        ->formatStateUsing(function($state){
+                                            return basename($state);
+                                        })->extraAttributes([ 
+                                            'wire:click' => '',
+                                            'class' => 'transition hover:text-primary-500 cursor-pointer',
+                                        ]),
+                                        
+                                ])->columnSpan(3),
+                            ])
                     ]),
 
                 EditAction::make()

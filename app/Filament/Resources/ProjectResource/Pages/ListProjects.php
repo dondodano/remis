@@ -41,7 +41,7 @@ class ListProjects extends ListRecords
 
     public function getDefaultActiveTab(): string | int | null
     {
-        return 'active';
+        return 'All';
     }
 
     protected function getHeaderWidgets(): array
@@ -50,4 +50,5 @@ class ListProjects extends ListRecords
             ProjectResource\Widgets\StatsProjectOverview::class,
         ];
     }
+
 }
