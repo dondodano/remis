@@ -6,6 +6,7 @@ use Filament\Forms;
 use Filament\Tables;
 use App\Models\Project;
 use Filament\Forms\Form;
+use App\Enums\MemberRole;
 use Filament\Tables\Table;
 use App\Enums\FundCategory;
 use App\Enums\ProjectStatus;
@@ -16,7 +17,10 @@ use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Textarea;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
@@ -77,7 +81,23 @@ class ProjectResource extends Resource
 
                     ])->columnSpan(2),// end Section 1
 
+                    Section::make('Project Members')
+                    ->description('Enter the member involve from the project.')
+                    ->collapsible()
+                    ->columnSpan(2)
+                    ->schema([
+                        Repeater::make('members')
+                            ->schema([
+                                TextInput::make('first_name')->required(),
+                                TextInput::make('last_name')->required(),
+                                Select::make('member_role')
+                                    ->options(MemberRole::array())->columnSpan(2),
+                            ])->columns(2)
+                    ]),
+
                     Section::make('Attachments')
+                    ->description('Files acceptable are the following: .pdf, .jpeg,. png, .docx, .xml and .zip')
+                    ->collapsible()
                     ->schema([
                         FileUpload::make('attachments')
                             ->label('Upload files here')
@@ -165,9 +185,6 @@ class ProjectResource extends Resource
                     ->searchable()
                     ->toggleable()
                     ->sortable(),
-                ImageColumn::make('project_leader')
-                    ->label('Leader')
-                    ->circular(),
                 ImageColumn::make('project_member')
                     ->label('Members')
                     ->circular()
@@ -204,8 +221,14 @@ class ProjectResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make()
-                ->label('')->color('gray')->tooltip('Edit user')
+                ViewAction::make()
+                ->label('')->color('gray')->tooltip('View project')
+                    ->form([
+
+                    ]),
+
+                EditAction::make()
+                ->label('')->color('gray')->tooltip('Edit project')
                     //methods below can be executed when edit is on modal
                     ->mutateFormDataUsing(function (array $data): array {
                         return $data;
