@@ -10,22 +10,6 @@
     "require": {
         "php": "^8.1",
         "archilex/filament-toggle-icon-column": "^3.0",
-<<<<<<< HEAD
-<<<<<<< HEAD
-        "awcodes/filament-gravatar": "^2.0",
-        "awcodes/shout": "^2.0",
-        "barryvdh/laravel-dompdf": "^2.0",
-        "bezhansalleh/filament-shield": "^3.1",
-        "filament/actions": "3.0-stable",
-        "filament/filament": "3.0-stable",
-        "filament/forms": "3.0-stable",
-        "filament/infolists": "3.0-stable",
-        "filament/notifications": "3.0-stable",
-        "filament/tables": "3.0-stable",
-        "filament/widgets": "3.0-stable",
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
         "awcodes/shout": "^2.0",
         "barryvdh/laravel-dompdf": "^2.0",
         "bezhansalleh/filament-shield": "^3.1",
@@ -36,27 +20,13 @@
         "filament/notifications": "^3.0",
         "filament/tables": "^3.0",
         "filament/widgets": "^3.0",
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/socialite": "^5.10",
         "laravel/tinker": "^2.8",
-<<<<<<< HEAD
-<<<<<<< HEAD
-        "leandrocfe/filament-apex-charts": "3.0",
-        "livewire/livewire": "^3.2",
-=======
         "laravolt/avatar": "^5.0",
         "leandrocfe/filament-apex-charts": "3.0",
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
-        "laravolt/avatar": "^5.0",
-        "leandrocfe/filament-apex-charts": "3.0",
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
         "pxlrbt/filament-spotlight": "^1.0",
         "saade/filament-fullcalendar": "3.0",
         "shuvroroy/filament-spatie-laravel-backup": "^2.1"

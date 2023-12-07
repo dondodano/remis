@@ -4,15 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "content-hash": "2d1c4b36fa05e1fbfbe3c475a1fb9d8d",
-=======
     "content-hash": "3a5f316f7f5d0c664d12280913b1b6b9",
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
-    "content-hash": "3a5f316f7f5d0c664d12280913b1b6b9",
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
     "packages": [
         {
             "name": "archilex/filament-toggle-icon-column",
@@ -93,71 +85,6 @@
             "time": "2023-11-13T16:51:22+00:00"
         },
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "name": "awcodes/filament-gravatar",
-            "version": "v2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/awcodes/filament-gravatar.git",
-                "reference": "ec2e415dd553dfaed86cb9b54bda67cc80bb3ddb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/awcodes/filament-gravatar/zipball/ec2e415dd553dfaed86cb9b54bda67cc80bb3ddb",
-                "reference": "ec2e415dd553dfaed86cb9b54bda67cc80bb3ddb",
-                "shasum": ""
-            },
-            "require": {
-                "filament/filament": "^3.0",
-                "php": "^8.1",
-                "spatie/laravel-package-tools": "^1.15"
-            },
-            "require-dev": {
-                "laravel/pint": "^1.0"
-            },
-            "type": "package",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Awcodes\\FilamentGravatar\\GravatarServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Awcodes\\FilamentGravatar\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Adam Weston",
-                    "email": "awcodes1@gmail.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Replace Filament's default avatar url provider with one for Gravatar.",
-            "keywords": [
-                "filament",
-                "framework",
-                "gravatar",
-                "laravel"
-            ],
-            "support": {
-                "issues": "https://github.com/awcodes/filament-gravatar/issues",
-                "source": "https://github.com/awcodes/filament-gravatar/tree/v2.0.0"
-            },
-            "time": "2023-08-01T17:38:09+00:00"
-        },
-        {
-=======
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             "name": "awcodes/shout",
             "version": "v2.0.2",
             "source": {
@@ -643,11 +570,6 @@
             "time": "2023-10-17T14:42:34+00:00"
         },
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             "name": "carbonphp/carbon-doctrine-types",
             "version": "2.0.0",
             "source": {
@@ -717,10 +639,6 @@
             "time": "2023-10-01T14:29:01+00:00"
         },
         {
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             "name": "danharrin/date-format-converter",
             "version": "v0.3.0",
             "source": {
@@ -1604,21 +1522,6 @@
         },
         {
             "name": "filament/actions",
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "version": "v3.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/filamentphp/actions.git",
-                "reference": "8bf1aeecf303fbc5a9efcf8a5764ec33b9ddf3a2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/actions/zipball/8bf1aeecf303fbc5a9efcf8a5764ec33b9ddf3a2",
-                "reference": "8bf1aeecf303fbc5a9efcf8a5764ec33b9ddf3a2",
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             "version": "v3.1.8",
             "source": {
                 "type": "git",
@@ -1629,10 +1532,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/filamentphp/actions/zipball/94528865f7a6666a3125da0cb872b17814437dbf",
                 "reference": "94528865f7a6666a3125da0cb872b17814437dbf",
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 "shasum": ""
             },
             "require": {
@@ -1640,22 +1539,10 @@
                 "filament/infolists": "self.version",
                 "filament/notifications": "self.version",
                 "filament/support": "self.version",
-<<<<<<< HEAD
-<<<<<<< HEAD
-                "illuminate/contracts": "^9.0|^10.0",
-                "illuminate/database": "^9.0|^10.0",
-                "illuminate/support": "^9.0|^10.0",
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 "illuminate/contracts": "^10.0",
                 "illuminate/database": "^10.0",
                 "illuminate/support": "^10.0",
                 "league/csv": "^9.11",
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 "php": "^8.1",
                 "spatie/laravel-package-tools": "^1.9"
             },
@@ -1682,25 +1569,6 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "time": "2023-08-01T12:40:54+00:00"
-        },
-        {
-            "name": "filament/filament",
-            "version": "v3.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/filamentphp/panels.git",
-                "reference": "4ceba5a3bb7e920275b7eb77bf95bce50c95c1e7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/panels/zipball/4ceba5a3bb7e920275b7eb77bf95bce50c95c1e7",
-                "reference": "4ceba5a3bb7e920275b7eb77bf95bce50c95c1e7",
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             "time": "2023-12-02T22:24:03+00:00"
         },
         {
@@ -1715,10 +1583,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/filamentphp/panels/zipball/d857640aa5cc4f55f448edf1c13488fb882c0979",
                 "reference": "d857640aa5cc4f55f448edf1c13488fb882c0979",
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 "shasum": ""
             },
             "require": {
@@ -1730,21 +1594,6 @@
                 "filament/support": "self.version",
                 "filament/tables": "self.version",
                 "filament/widgets": "self.version",
-<<<<<<< HEAD
-<<<<<<< HEAD
-                "illuminate/auth": "^9.0|^10.0",
-                "illuminate/console": "^9.0|^10.0",
-                "illuminate/contracts": "^9.0|^10.0",
-                "illuminate/cookie": "^9.0|^10.0",
-                "illuminate/database": "^9.0|^10.0",
-                "illuminate/http": "^9.0|^10.0",
-                "illuminate/routing": "^9.0|^10.0",
-                "illuminate/session": "^9.0|^10.0",
-                "illuminate/support": "^9.0|^10.0",
-                "illuminate/view": "^9.0|^10.0",
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 "illuminate/auth": "^10.0",
                 "illuminate/console": "^10.0",
                 "illuminate/contracts": "^10.0",
@@ -1755,10 +1604,6 @@
                 "illuminate/session": "^10.0",
                 "illuminate/support": "^10.0",
                 "illuminate/view": "^10.0",
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 "php": "^8.1",
                 "spatie/laravel-package-tools": "^1.9"
             },
@@ -1789,25 +1634,6 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "time": "2023-08-01T12:41:01+00:00"
-        },
-        {
-            "name": "filament/forms",
-            "version": "v3.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/filamentphp/forms.git",
-                "reference": "83c93a2b4750de96b297bc6c49d8f875727b9f88"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/forms/zipball/83c93a2b4750de96b297bc6c49d8f875727b9f88",
-                "reference": "83c93a2b4750de96b297bc6c49d8f875727b9f88",
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             "time": "2023-12-02T22:24:06+00:00"
         },
         {
@@ -1822,28 +1648,12 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/filamentphp/forms/zipball/6a26439d7ff7b81ba00d2ca88a27a57f8e22fb14",
                 "reference": "6a26439d7ff7b81ba00d2ca88a27a57f8e22fb14",
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 "shasum": ""
             },
             "require": {
                 "danharrin/date-format-converter": "^0.3",
                 "filament/actions": "self.version",
                 "filament/support": "self.version",
-<<<<<<< HEAD
-<<<<<<< HEAD
-                "illuminate/console": "^9.0|^10.0",
-                "illuminate/contracts": "^9.0|^10.0",
-                "illuminate/database": "^9.0|^10.0",
-                "illuminate/filesystem": "^9.0|^10.0",
-                "illuminate/support": "^9.0|^10.0",
-                "illuminate/validation": "^9.0|^10.0",
-                "illuminate/view": "^9.0|^10.0",
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 "illuminate/console": "^10.0",
                 "illuminate/contracts": "^10.0",
                 "illuminate/database": "^10.0",
@@ -1851,10 +1661,6 @@
                 "illuminate/support": "^10.0",
                 "illuminate/validation": "^10.0",
                 "illuminate/view": "^10.0",
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 "php": "^8.1",
                 "spatie/laravel-package-tools": "^1.9"
             },
@@ -1884,25 +1690,6 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "time": "2023-08-01T12:40:55+00:00"
-        },
-        {
-            "name": "filament/infolists",
-            "version": "v3.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/filamentphp/infolists.git",
-                "reference": "8099be5cfa69dd73a7035117add2840b78b8a4ba"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/infolists/zipball/8099be5cfa69dd73a7035117add2840b78b8a4ba",
-                "reference": "8099be5cfa69dd73a7035117add2840b78b8a4ba",
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             "time": "2023-12-02T22:24:00+00:00"
         },
         {
@@ -1917,36 +1704,17 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/filamentphp/infolists/zipball/c99cef616da4b87640cb62e4869df9c5a8b306ce",
                 "reference": "c99cef616da4b87640cb62e4869df9c5a8b306ce",
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 "shasum": ""
             },
             "require": {
                 "filament/actions": "self.version",
                 "filament/support": "self.version",
-<<<<<<< HEAD
-<<<<<<< HEAD
-                "illuminate/console": "^9.0|^10.0",
-                "illuminate/contracts": "^9.0|^10.0",
-                "illuminate/database": "^9.0|^10.0",
-                "illuminate/filesystem": "^9.0|^10.0",
-                "illuminate/support": "^9.0|^10.0",
-                "illuminate/view": "^9.0|^10.0",
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 "illuminate/console": "^10.0",
                 "illuminate/contracts": "^10.0",
                 "illuminate/database": "^10.0",
                 "illuminate/filesystem": "^10.0",
                 "illuminate/support": "^10.0",
                 "illuminate/view": "^10.0",
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 "php": "^8.1",
                 "spatie/laravel-package-tools": "^1.9"
             },
@@ -1973,25 +1741,6 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "time": "2023-08-01T12:40:50+00:00"
-        },
-        {
-            "name": "filament/notifications",
-            "version": "v3.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/filamentphp/notifications.git",
-                "reference": "1bdffb881ec8eedecf004e5b51032c256080d4c3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/notifications/zipball/1bdffb881ec8eedecf004e5b51032c256080d4c3",
-                "reference": "1bdffb881ec8eedecf004e5b51032c256080d4c3",
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             "time": "2023-12-02T22:24:00+00:00"
         },
         {
@@ -2006,32 +1755,15 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/filamentphp/notifications/zipball/b0a917a041bee3819a3b58c543d82ba463ffb20c",
                 "reference": "b0a917a041bee3819a3b58c543d82ba463ffb20c",
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 "shasum": ""
             },
             "require": {
                 "filament/actions": "self.version",
                 "filament/support": "self.version",
-<<<<<<< HEAD
-<<<<<<< HEAD
-                "illuminate/contracts": "^9.0|^10.0",
-                "illuminate/filesystem": "^9.0|^10.0",
-                "illuminate/notifications": "^9.0|^10.0",
-                "illuminate/support": "^9.0|^10.0",
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 "illuminate/contracts": "^10.0",
                 "illuminate/filesystem": "^10.0",
                 "illuminate/notifications": "^10.0",
                 "illuminate/support": "^10.0",
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 "php": "^8.1",
                 "spatie/laravel-package-tools": "^1.9"
             },
@@ -2061,25 +1793,6 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "time": "2023-08-01T12:40:52+00:00"
-        },
-        {
-            "name": "filament/support",
-            "version": "v3.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/filamentphp/support.git",
-                "reference": "956d6ffdf2da41798e98ec9bd7088fb42bac218e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/support/zipball/956d6ffdf2da41798e98ec9bd7088fb42bac218e",
-                "reference": "956d6ffdf2da41798e98ec9bd7088fb42bac218e",
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             "time": "2023-12-02T22:24:00+00:00"
         },
         {
@@ -2094,29 +1807,12 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/filamentphp/support/zipball/2bdf07a954c9873e6b4c6f2654798d4b38f62a27",
                 "reference": "2bdf07a954c9873e6b4c6f2654798d4b38f62a27",
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 "shasum": ""
             },
             "require": {
                 "blade-ui-kit/blade-heroicons": "^2.0",
                 "doctrine/dbal": "^3.2",
                 "ext-intl": "*",
-<<<<<<< HEAD
-<<<<<<< HEAD
-                "illuminate/contracts": "^9.0|^10.0",
-                "illuminate/support": "^9.0|^10.0",
-                "illuminate/view": "^9.0|^10.0",
-                "livewire/livewire": "^3.0",
-                "php": "^8.1",
-                "ryangjchandler/blade-capture-directive": "^0.2|^0.3",
-                "spatie/color": "^1.5",
-                "spatie/invade": "^1.0",
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 "illuminate/contracts": "^10.0",
                 "illuminate/support": "^10.0",
                 "illuminate/view": "^10.0",
@@ -2125,10 +1821,6 @@
                 "ryangjchandler/blade-capture-directive": "^0.2|^0.3",
                 "spatie/color": "^1.5",
                 "spatie/invade": "^1.0|^2.0",
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 "spatie/laravel-package-tools": "^1.9",
                 "symfony/html-sanitizer": "^6.1"
             },
@@ -2158,25 +1850,6 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "time": "2023-08-01T12:41:15+00:00"
-        },
-        {
-            "name": "filament/tables",
-            "version": "v3.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/filamentphp/tables.git",
-                "reference": "c0909cfc9fc5537feea7c133fce504b644de07e0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/tables/zipball/c0909cfc9fc5537feea7c133fce504b644de07e0",
-                "reference": "c0909cfc9fc5537feea7c133fce504b644de07e0",
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             "time": "2023-12-02T22:24:03+00:00"
         },
         {
@@ -2191,37 +1864,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/filamentphp/tables/zipball/6a9a952aefc372e77eb07a44e4eb558d94f621b3",
                 "reference": "6a9a952aefc372e77eb07a44e4eb558d94f621b3",
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 "shasum": ""
             },
             "require": {
                 "filament/actions": "self.version",
                 "filament/forms": "self.version",
                 "filament/support": "self.version",
-<<<<<<< HEAD
-<<<<<<< HEAD
-                "illuminate/console": "^9.0|^10.0",
-                "illuminate/contracts": "^9.0|^10.0",
-                "illuminate/database": "^9.0|^10.0",
-                "illuminate/filesystem": "^9.0|^10.0",
-                "illuminate/support": "^9.0|^10.0",
-                "illuminate/view": "^9.0|^10.0",
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 "illuminate/console": "^10.0",
                 "illuminate/contracts": "^10.0",
                 "illuminate/database": "^10.0",
                 "illuminate/filesystem": "^10.0",
                 "illuminate/support": "^10.0",
                 "illuminate/view": "^10.0",
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 "kirschbaum-development/eloquent-power-joins": "^3.0",
                 "php": "^8.1",
                 "spatie/laravel-package-tools": "^1.9"
@@ -2249,25 +1903,6 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "time": "2023-08-01T12:41:11+00:00"
-        },
-        {
-            "name": "filament/widgets",
-            "version": "v3.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/filamentphp/widgets.git",
-                "reference": "04838f8e5d3aac7454ad9f8733c5e855e31e21bc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/widgets/zipball/04838f8e5d3aac7454ad9f8733c5e855e31e21bc",
-                "reference": "04838f8e5d3aac7454ad9f8733c5e855e31e21bc",
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             "time": "2023-12-02T22:24:03+00:00"
         },
         {
@@ -2282,10 +1917,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/filamentphp/widgets/zipball/64c4e7074908426840f4b16f82822b178dc21afa",
                 "reference": "64c4e7074908426840f4b16f82822b178dc21afa",
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 "shasum": ""
             },
             "require": {
@@ -2316,15 +1947,7 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "time": "2023-08-01T12:41:20+00:00"
-=======
             "time": "2023-11-29T15:29:52+00:00"
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
-            "time": "2023-11-29T15:29:52+00:00"
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
         },
         {
             "name": "fruitcake/php-cors",
@@ -2865,11 +2488,6 @@
             "time": "2023-08-27T10:19:19+00:00"
         },
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             "name": "intervention/image",
             "version": "2.7.2",
             "source": {
@@ -2954,10 +2572,6 @@
             "time": "2022-05-21T17:30:32+00:00"
         },
         {
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             "name": "kirschbaum-development/eloquent-power-joins",
             "version": "3.3.3",
             "source": {
@@ -3544,11 +3158,6 @@
             "time": "2023-08-15T14:27:00+00:00"
         },
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             "name": "laravolt/avatar",
             "version": "5.0.0",
             "source": {
@@ -3633,10 +3242,6 @@
             "time": "2023-02-25T02:57:48+00:00"
         },
         {
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             "name": "league/commonmark",
             "version": "2.4.1",
             "source": {
@@ -3825,11 +3430,6 @@
             "time": "2022-12-11T20:36:23+00:00"
         },
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             "name": "league/csv",
             "version": "9.12.0",
             "source": {
@@ -3919,10 +3519,6 @@
             "time": "2023-12-01T17:54:07+00:00"
         },
         {
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             "name": "league/flysystem",
             "version": "3.21.0",
             "source": {
@@ -4206,21 +3802,6 @@
         },
         {
             "name": "league/uri",
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "version": "7.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/thephpleague/uri.git",
-                "reference": "36743c3961bb82bf93da91917b6bced0358a8d45"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/uri/zipball/36743c3961bb82bf93da91917b6bced0358a8d45",
-                "reference": "36743c3961bb82bf93da91917b6bced0358a8d45",
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             "version": "7.4.0",
             "source": {
                 "type": "git",
@@ -4231,10 +3812,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/thephpleague/uri/zipball/bf414ba956d902f5d98bf9385fcf63954f09dce5",
                 "reference": "bf414ba956d902f5d98bf9385fcf63954f09dce5",
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 "shasum": ""
             },
             "require": {
@@ -4303,15 +3880,7 @@
                 "docs": "https://uri.thephpleague.com",
                 "forum": "https://thephpleague.slack.com",
                 "issues": "https://github.com/thephpleague/uri-src/issues",
-<<<<<<< HEAD
-<<<<<<< HEAD
-                "source": "https://github.com/thephpleague/uri/tree/7.3.0"
-=======
                 "source": "https://github.com/thephpleague/uri/tree/7.4.0"
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
-                "source": "https://github.com/thephpleague/uri/tree/7.4.0"
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             },
             "funding": [
                 {
@@ -4319,25 +3888,6 @@
                     "type": "github"
                 }
             ],
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "time": "2023-09-09T17:21:43+00:00"
-        },
-        {
-            "name": "league/uri-interfaces",
-            "version": "7.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/thephpleague/uri-interfaces.git",
-                "reference": "c409b60ed2245ff94c965a8c798a60166db53361"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/uri-interfaces/zipball/c409b60ed2245ff94c965a8c798a60166db53361",
-                "reference": "c409b60ed2245ff94c965a8c798a60166db53361",
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             "time": "2023-12-01T06:24:25+00:00"
         },
         {
@@ -4352,10 +3902,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/thephpleague/uri-interfaces/zipball/bd8c487ec236930f7bbc42b8d374fa882fbba0f3",
                 "reference": "bd8c487ec236930f7bbc42b8d374fa882fbba0f3",
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 "shasum": ""
             },
             "require": {
@@ -4418,15 +3964,7 @@
                 "docs": "https://uri.thephpleague.com",
                 "forum": "https://thephpleague.slack.com",
                 "issues": "https://github.com/thephpleague/uri-src/issues",
-<<<<<<< HEAD
-<<<<<<< HEAD
-                "source": "https://github.com/thephpleague/uri-interfaces/tree/7.3.0"
-=======
                 "source": "https://github.com/thephpleague/uri-interfaces/tree/7.4.0"
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
-                "source": "https://github.com/thephpleague/uri-interfaces/tree/7.4.0"
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             },
             "funding": [
                 {
@@ -4434,15 +3972,7 @@
                     "type": "github"
                 }
             ],
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "time": "2023-09-09T17:21:43+00:00"
-=======
             "time": "2023-11-24T15:40:42+00:00"
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
-            "time": "2023-11-24T15:40:42+00:00"
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
         },
         {
             "name": "leandrocfe/filament-apex-charts",
@@ -4520,21 +4050,6 @@
         },
         {
             "name": "livewire/livewire",
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "version": "v3.2.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/livewire/livewire.git",
-                "reference": "c5366279aeb10f75bb358032bb832702e3d0d35a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/c5366279aeb10f75bb358032bb832702e3d0d35a",
-                "reference": "c5366279aeb10f75bb358032bb832702e3d0d35a",
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             "version": "v3.2.3",
             "source": {
                 "type": "git",
@@ -4545,10 +4060,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/livewire/livewire/zipball/724e712cac25c40455102f0b5abd002fd269433b",
                 "reference": "724e712cac25c40455102f0b5abd002fd269433b",
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 "shasum": ""
             },
             "require": {
@@ -4601,15 +4112,7 @@
             "description": "A front-end framework for Laravel.",
             "support": {
                 "issues": "https://github.com/livewire/livewire/issues",
-<<<<<<< HEAD
-<<<<<<< HEAD
-                "source": "https://github.com/livewire/livewire/tree/v3.2.2"
-=======
                 "source": "https://github.com/livewire/livewire/tree/v3.2.3"
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
-                "source": "https://github.com/livewire/livewire/tree/v3.2.3"
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             },
             "funding": [
                 {
@@ -4617,15 +4120,7 @@
                     "type": "github"
                 }
             ],
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "time": "2023-11-29T17:43:29+00:00"
-=======
             "time": "2023-12-02T18:55:31+00:00"
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
-            "time": "2023-12-02T18:55:31+00:00"
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
         },
         {
             "name": "masterminds/html5",
@@ -4797,24 +4292,6 @@
         },
         {
             "name": "nesbot/carbon",
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "version": "2.71.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "98276233188583f2ff845a0f992a235472d9466a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/98276233188583f2ff845a0f992a235472d9466a",
-                "reference": "98276233188583f2ff845a0f992a235472d9466a",
-                "shasum": ""
-            },
-            "require": {
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             "version": "2.72.0",
             "source": {
                 "type": "git",
@@ -4829,10 +4306,6 @@
             },
             "require": {
                 "carbonphp/carbon-doctrine-types": "*",
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 "ext-json": "*",
                 "php": "^7.1.8 || ^8.0",
                 "psr/clock": "^1.0",
@@ -4844,18 +4317,8 @@
                 "psr/clock-implementation": "1.0"
             },
             "require-dev": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-                "doctrine/dbal": "^2.0 || ^3.1.4",
-                "doctrine/orm": "^2.7",
-=======
                 "doctrine/dbal": "^2.0 || ^3.1.4 || ^4.0",
                 "doctrine/orm": "^2.7 || ^3.0",
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
-                "doctrine/dbal": "^2.0 || ^3.1.4 || ^4.0",
-                "doctrine/orm": "^2.7 || ^3.0",
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 "friendsofphp/php-cs-fixer": "^3.0",
                 "kylekatarnls/multi-tester": "^2.0",
                 "ondrejmirtes/better-reflection": "*",
@@ -4932,15 +4395,7 @@
                     "type": "tidelift"
                 }
             ],
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "time": "2023-09-25T11:31:05+00:00"
-=======
             "time": "2023-11-28T10:13:25+00:00"
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
-            "time": "2023-11-28T10:13:25+00:00"
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
         },
         {
             "name": "nette/schema",
@@ -6631,21 +6086,6 @@
         },
         {
             "name": "spatie/invade",
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "version": "1.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spatie/invade.git",
-                "reference": "d0a9c895a96152549d478a7e3420e19039eef038"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spatie/invade/zipball/d0a9c895a96152549d478a7e3420e19039eef038",
-                "reference": "d0a9c895a96152549d478a7e3420e19039eef038",
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             "version": "2.0.0",
             "source": {
                 "type": "git",
@@ -6656,10 +6096,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/spatie/invade/zipball/7b20a25486de69198e402da20dc924d8bcc8024a",
                 "reference": "7b20a25486de69198e402da20dc924d8bcc8024a",
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 "shasum": ""
             },
             "require": {
@@ -6671,19 +6107,6 @@
                 "spatie/ray": "^1.28"
             },
             "type": "library",
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "extra": {
-                "phpstan": {
-                    "includes": [
-                        "phpstan-extension.neon"
-                    ]
-                }
-            },
-=======
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             "autoload": {
                 "files": [
                     "src/functions.php"
@@ -6710,15 +6133,7 @@
                 "spatie"
             ],
             "support": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-                "source": "https://github.com/spatie/invade/tree/1.1.1"
-=======
                 "source": "https://github.com/spatie/invade/tree/2.0.0"
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
-                "source": "https://github.com/spatie/invade/tree/2.0.0"
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             },
             "funding": [
                 {
@@ -6726,15 +6141,7 @@
                     "type": "github"
                 }
             ],
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "time": "2022-07-05T09:31:00+00:00"
-=======
             "time": "2023-07-19T18:55:36+00:00"
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
-            "time": "2023-07-19T18:55:36+00:00"
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
         },
         {
             "name": "spatie/laravel-backup",
@@ -7114,21 +6521,6 @@
         },
         {
             "name": "symfony/console",
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "version": "v6.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/console.git",
-                "reference": "cd9864b47c367450e14ab32f78fdbf98c44c26b6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/cd9864b47c367450e14ab32f78fdbf98c44c26b6",
-                "reference": "cd9864b47c367450e14ab32f78fdbf98c44c26b6",
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             "version": "v6.4.1",
             "source": {
                 "type": "git",
@@ -7139,10 +6531,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/console/zipball/a550a7c99daeedef3f9d23fb82e3531525ff11fd",
                 "reference": "a550a7c99daeedef3f9d23fb82e3531525ff11fd",
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 "shasum": ""
             },
             "require": {
@@ -7207,15 +6595,7 @@
                 "terminal"
             ],
             "support": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-                "source": "https://github.com/symfony/console/tree/v6.4.0"
-=======
                 "source": "https://github.com/symfony/console/tree/v6.4.1"
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
-                "source": "https://github.com/symfony/console/tree/v6.4.1"
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             },
             "funding": [
                 {
@@ -7231,15 +6611,7 @@
                     "type": "tidelift"
                 }
             ],
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "time": "2023-11-20T16:41:16+00:00"
-=======
             "time": "2023-11-30T10:54:28+00:00"
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
-            "time": "2023-11-30T10:54:28+00:00"
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
         },
         {
             "name": "symfony/css-selector",
@@ -7816,21 +7188,6 @@
         },
         {
             "name": "symfony/http-kernel",
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "version": "v6.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/http-kernel.git",
-                "reference": "16a29c453966f29466ad34444ce97970a336f3c8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/16a29c453966f29466ad34444ce97970a336f3c8",
-                "reference": "16a29c453966f29466ad34444ce97970a336f3c8",
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             "version": "v6.4.1",
             "source": {
                 "type": "git",
@@ -7841,10 +7198,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/http-kernel/zipball/2953274c16a229b3933ef73a6898e18388e12e1b",
                 "reference": "2953274c16a229b3933ef73a6898e18388e12e1b",
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 "shasum": ""
             },
             "require": {
@@ -7928,15 +7281,7 @@
             "description": "Provides a structured process for converting a Request into a Response",
             "homepage": "https://symfony.com",
             "support": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-                "source": "https://github.com/symfony/http-kernel/tree/v6.4.0"
-=======
                 "source": "https://github.com/symfony/http-kernel/tree/v6.4.1"
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
-                "source": "https://github.com/symfony/http-kernel/tree/v6.4.1"
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             },
             "funding": [
                 {
@@ -7952,15 +7297,7 @@
                     "type": "tidelift"
                 }
             ],
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "time": "2023-11-29T10:40:15+00:00"
-=======
             "time": "2023-12-01T17:02:02+00:00"
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
-            "time": "2023-12-01T17:02:02+00:00"
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
         },
         {
             "name": "symfony/mailer",
@@ -8927,21 +8264,6 @@
         },
         {
             "name": "symfony/routing",
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "version": "v6.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/routing.git",
-                "reference": "ae014d60d7c8e80be5c3b644a286e91249a3e8f4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/routing/zipball/ae014d60d7c8e80be5c3b644a286e91249a3e8f4",
-                "reference": "ae014d60d7c8e80be5c3b644a286e91249a3e8f4",
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             "version": "v6.4.1",
             "source": {
                 "type": "git",
@@ -8952,10 +8274,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/routing/zipball/0c95c164fdba18b12523b75e64199ca3503e6d40",
                 "reference": "0c95c164fdba18b12523b75e64199ca3503e6d40",
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 "shasum": ""
             },
             "require": {
@@ -9009,15 +8327,7 @@
                 "url"
             ],
             "support": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-                "source": "https://github.com/symfony/routing/tree/v6.4.0"
-=======
                 "source": "https://github.com/symfony/routing/tree/v6.4.1"
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
-                "source": "https://github.com/symfony/routing/tree/v6.4.1"
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             },
             "funding": [
                 {
@@ -9033,15 +8343,7 @@
                     "type": "tidelift"
                 }
             ],
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "time": "2023-11-29T08:04:54+00:00"
-=======
             "time": "2023-12-01T14:54:37+00:00"
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
-            "time": "2023-12-01T14:54:37+00:00"
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
         },
         {
             "name": "symfony/service-contracts",
@@ -11331,21 +10633,6 @@
         },
         {
             "name": "phpunit/phpunit",
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "version": "10.4.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "cacd8b9dd224efa8eb28beb69004126c7ca1a1a1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/cacd8b9dd224efa8eb28beb69004126c7ca1a1a1",
-                "reference": "cacd8b9dd224efa8eb28beb69004126c7ca1a1a1",
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             "version": "10.5.1",
             "source": {
                 "type": "git",
@@ -11356,10 +10643,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/d5d9dca6a902d05b34c4bcbc7c1636ce1dc25408",
                 "reference": "d5d9dca6a902d05b34c4bcbc7c1636ce1dc25408",
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 "shasum": ""
             },
             "require": {
@@ -11399,15 +10682,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    "dev-main": "10.4-dev"
-=======
                     "dev-main": "10.5-dev"
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
-                    "dev-main": "10.5-dev"
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 }
             },
             "autoload": {
@@ -11439,15 +10714,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-<<<<<<< HEAD
-<<<<<<< HEAD
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.4.2"
-=======
                 "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.1"
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.1"
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             },
             "funding": [
                 {
@@ -11463,15 +10730,7 @@
                     "type": "tidelift"
                 }
             ],
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "time": "2023-10-26T07:21:45+00:00"
-=======
             "time": "2023-12-01T16:57:05+00:00"
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
-            "time": "2023-12-01T16:57:05+00:00"
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
         },
         {
             "name": "sebastian/cli-parser",

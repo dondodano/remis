@@ -20,14 +20,6 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-<<<<<<< HEAD
-<<<<<<< HEAD
-        'name',
-        'email',
-        'password',
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
         'first_name',
         'last_name',
         'email',
@@ -37,10 +29,6 @@ class User extends Authenticatable
         'google_id',
         'avatar',
         'remember_token'
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
     ];
 
     /**
@@ -65,11 +53,6 @@ class User extends Authenticatable
     ];
 
     const DELETED_AT = 'deleted_at';
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
 
 
     /**
@@ -91,8 +74,4 @@ class User extends Authenticatable
 
         });
     }
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
 }

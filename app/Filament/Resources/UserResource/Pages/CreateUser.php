@@ -2,31 +2,15 @@
 
 namespace App\Filament\Resources\UserResource\Pages;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-use App\Filament\Resources\UserResource;
-use Filament\Actions;
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
 use Filament\Actions;
 use Actions\DeleteAction;
 use App\Filament\Resources\UserResource;
 use Filament\Notifications\Notification;
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateUser extends CreateRecord
 {
     protected static string $resource = UserResource::class;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
@@ -47,8 +31,4 @@ class CreateUser extends CreateRecord
             ->title('User saved')
             ->body('The user has been created successfully.');
     }
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
 }

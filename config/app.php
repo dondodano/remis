@@ -31,11 +31,6 @@ return [
 
     'env' => env('APP_ENV', 'production'),
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
     // 'google_client_id' => env('GOOGLE_CLIENT_ID', '57447076353-d3069sbh532kdndbooo846oevqmnq5ue.apps.googleusercontent.com'),
     // 'google_client_secret' => env('GOOGLE_CLIENT_SECRET', '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'),
     // 'email_domain' => env('EMAIL_DOMAIN', 'spamast.edu.ph'),
@@ -44,10 +39,6 @@ return [
     'google_client_secret' => env('GOOGLE_CLIENT_SECRET'),
     'email_domain' => env('EMAIL_DOMAIN'),
 
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode

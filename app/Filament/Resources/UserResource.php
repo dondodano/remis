@@ -2,39 +2,16 @@
 
 namespace App\Filament\Resources;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-use Filament\Forms;
-use App\Models\User;
-use Filament\Tables;
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
 use Closure;
 use Filament\Forms;
 use App\Models\User;
 use Filament\Tables;
 use App\Enums\UserRole;
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Actions\Action;
 use Filament\Resources\Resource;
 use Filament\Support\Colors\Color;
-<<<<<<< HEAD
-<<<<<<< HEAD
-use Filament\Tables\Filters\Filter;
-use Filament\Support\Enums\ActionSize;
-use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Notifications\Notification;
-use Filament\Tables\Actions\ActionGroup;
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
 use Filament\Forms\Components\Grid;
 use Filament\Tables\Filters\Filter;
 use Filament\Forms\Components\Select;
@@ -47,56 +24,29 @@ use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Columns\ImageColumn;
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Filters\TrashedFilter;
 use App\Filament\Resources\UserResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\UserResource\RelationManagers;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 use Filament\Actions\CreateAction;
 
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
-use Filament\Actions\CreateAction;
-
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
 
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
     protected static ?int $navigationSort = 3;
 
     protected static ?string $navigationGroup = 'System';
 
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-<<<<<<< HEAD
-<<<<<<< HEAD
-                //
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 Section::make('User information')
                     ->description('Please enter your personal information in the fields below. ')
                     ->icon('heroicon-m-identification')
@@ -162,10 +112,6 @@ class UserResource extends Resource
                         ]),
 
 
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             ]);
     }
 
@@ -173,16 +119,6 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-<<<<<<< HEAD
-<<<<<<< HEAD
-                TextColumn::make('name')
-                    ->searchable()
-                    ->sortable(),
-                TextColumn::make('email')
-                    ->searchable()
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 ImageColumn::make('avatar'),
                 TextColumn::make('first_name')
                     ->formatStateUsing(function($state, User $user){
@@ -195,32 +131,16 @@ class UserResource extends Resource
                 TextColumn::make('email')
                     ->searchable()
                     ->toggleable()
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                     ->sortable(),
                 TextColumn::make('user_role')
                     ->label('Role')
                     ->badge()
                     ->color(Color::Blue)
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    ->searchable(),
-                IconColumn::make('email_verified_at')
-                    ->label('Verified?')
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                     ->toggleable()
                     ->searchable(),
                 IconColumn::make('email_verified_at')
                     ->label('Verified?')
                     ->toggleable()
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                     ->getStateUsing(fn ($record): bool => $record->email_verified_at !== null)
                     ->boolean()
                     ->trueIcon('heroicon-o-shield-check')
@@ -241,40 +161,19 @@ class UserResource extends Resource
                     )
             ])
             ->actions([
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
                 // Action : Send Credential
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
-                // Action : Send Credential
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 Tables\Actions\Action::make('send-credential')
                     ->label('')
                     ->icon('heroicon-o-paper-airplane')
                     ->action(function(User $user): void{
                         Notification::make()
                             ->title("Sending credential to " . $user->email)
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
                             ->icon('heroicon-o-paper-airplane')
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
-                            ->icon('heroicon-o-paper-airplane')
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                             ->success()
                             ->duration(2000)
                             ->send();
                     })->color('gray')->tooltip('Send credentials to email'),
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-                Tables\Actions\EditAction::make()->label('')->color('gray')->tooltip('Edit user'),
-
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 // Action : Edit User on Modal
                 Tables\Actions\EditAction::make()
                     ->label('')->color('gray')->tooltip('Edit user')
@@ -293,10 +192,6 @@ class UserResource extends Resource
                     ),
 
                 // Action Group : of Delete , Approve and Disapprove User
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 ActionGroup::make([
                     Tables\Actions\DeleteAction::make()->label('Delete')->color('gray'),
                     Tables\Actions\RestoreAction::make()->label('Restore')->color('gray'),
@@ -349,22 +244,11 @@ class UserResource extends Resource
                 ]),
             ])
             ->emptyStateActions([
-<<<<<<< HEAD
-<<<<<<< HEAD
-                Tables\Actions\CreateAction::make(),
-            ]);
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                 Tables\Actions\CreateAction::make()
                     ->label('Add new user')
                     ->icon('heroicon-m-plus'),
             ])
             ->emptyStateDescription('Once you add new user, it will appear here.');
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
     }
 
     public static function getRelations(): array
@@ -379,15 +263,7 @@ class UserResource extends Resource
         return [
             'index' => Pages\ListUsers::route('/'),
             'create' => Pages\CreateUser::route('/create'),
-<<<<<<< HEAD
-<<<<<<< HEAD
-            'edit' => Pages\EditUser::route('/{record}/edit'),
-=======
             //'edit' => Pages\EditUser::route('/{record}/edit'),
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
-            //'edit' => Pages\EditUser::route('/{record}/edit'),
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
         ];
     }
 
@@ -398,12 +274,5 @@ class UserResource extends Resource
                 SoftDeletingScope::class,
             ]);
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
-
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
 }

@@ -24,17 +24,6 @@ class UserFactory extends Factory
         $enumToArray = UserRole::cases();
         $userRoles = array_column($enumToArray, 'value');
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-        return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
-            'user_role' => $userRoles[rand(1,8)],
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
         $firstName = fake()->firstName();
         $lastName = fake()->lastName();
 
@@ -50,10 +39,6 @@ class UserFactory extends Factory
             'password' => static::$password ??= Hash::make('password'),
             'user_role' => $userRoles[rand(1,8)],
             'avatar' => 'https://ui-avatars.com/api/?background=random&size=128&rounded=true&bold=true&format=svg&name='.$nameWithPlus,
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             'remember_token' => Str::random(10),
 
         ];

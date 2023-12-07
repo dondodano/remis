@@ -1,14 +1,7 @@
 <?php
 namespace App\Enums;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 use Filament\Notifications\Notification;
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
-use Filament\Notifications\Notification;
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
 use Filament\Support\Contracts\HasLabel;
 
 enum UserRole: string implements HasLabel{
@@ -21,21 +14,10 @@ enum UserRole: string implements HasLabel{
     case RIDEDirector = 'ridedirector';
     case AccountingOfficer = 'accountingofficer';
     case RIDEStaff = 'ridestaff';
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-    public function getLabel(): ?string{
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
     case Guest = 'guest';
 
     public function getLabel(): ?string
     {
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
         return match ($this)
         {
             self::Super => 'Super',
@@ -47,13 +29,6 @@ enum UserRole: string implements HasLabel{
             self::RIDEDirector => 'RIDE Director',
             self::AccountingOfficer => 'Accounting Officer',
             self::RIDEStaff => 'RIDE Staff',
-<<<<<<< HEAD
-<<<<<<< HEAD
-        };
-    }
-=======
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             self::Guest => 'Guest'
         };
     }
@@ -101,8 +76,4 @@ enum UserRole: string implements HasLabel{
         }
         return $array;
     }
-<<<<<<< HEAD
->>>>>>> b6240d91eae0fa86540454de2c93ee7643754ce3
-=======
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
 }

@@ -11,11 +11,6 @@ use App\Enums\FundCategory;
 use App\Enums\ProjectStatus;
 use App\Enums\ProjectCategory;
 use Filament\Resources\Resource;
-<<<<<<< HEAD
-=======
-use App\Models\ProjectAttachment;
-use Filament\Support\Colors\Color;
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Select;
@@ -23,10 +18,6 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
-<<<<<<< HEAD
-=======
-use Filament\Notifications\Notification;
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
@@ -88,15 +79,7 @@ class ProjectResource extends Resource
                     ->schema([
                         FileUpload::make('attachments')
                             ->label('Upload files here')
-<<<<<<< HEAD
                             ->preserveFilenames()
-=======
-                            ->reorderable()
-                            ->appendFiles()
-                            ->openable()
-                            ->downloadable()
-                            ->previewable(false)
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                             ->acceptedFileTypes([
                                 'application/pdf',
                                 'image/jpeg',
@@ -107,14 +90,9 @@ class ProjectResource extends Resource
                                 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
                                 'application/x-zip-compressed'
                             ])
-<<<<<<< HEAD
                             ->disk('public')
                             ->directory('attachments')
                             ->downloadable()
-=======
-                            ->disk('local')
-                            ->directory('/public/attachments')
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                         ->multiple()
                     ])->columnSpan(2),// end Section 2
                 ])->columnSpan(['lg' => 2]),// end Group 1
@@ -190,21 +168,12 @@ class ProjectResource extends Resource
                     ->circular()
                     ->stacked(),
                 TextColumn::make('start_at')
-<<<<<<< HEAD
                     ->label('Start Date')
                     ->searchable()
                     ->toggleable()
                     ->sortable(),
                 TextColumn::make('end_at')
                     ->label('End Date')
-=======
-                    ->label('Duration')
-                    ->badge()
-                    ->color(Color::Amber)
-                    ->formatStateUsing(function($state, Project $project){
-                        return date('Y-m-d', strtotime($project->start_at)) .' | '. date('Y-m-d', strtotime($project->end_at));
-                    })
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                     ->searchable()
                     ->toggleable()
                     ->sortable(),
@@ -220,11 +189,6 @@ class ProjectResource extends Resource
                     ->sortable(),
                 TextColumn::make('project_status')
                     ->label('Status')
-<<<<<<< HEAD
-=======
-                    ->badge()
-                    ->color(Color::Blue)
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
                     ->searchable()
                     ->toggleable()
                     ->sortable(),
@@ -233,21 +197,7 @@ class ProjectResource extends Resource
                 //
             ])
             ->actions([
-<<<<<<< HEAD
                 Tables\Actions\EditAction::make(),
-=======
-                Tables\Actions\EditAction::make()
-                    ->label('')->color('gray')->tooltip('Edit Project')
-                    ->mutateFormDataUsing(function (array $data, Project $project): array {
-                        return $data;
-                    })
-                    ->successNotification(
-                        Notification::make()
-                            ->success()
-                            ->title('Project updated')
-                            ->body('The project has been saved successfully.'),
-                    ),
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -274,11 +224,7 @@ class ProjectResource extends Resource
         return [
             'index' => Pages\ListProjects::route('/'),
             'create' => Pages\CreateProject::route('/create'),
-<<<<<<< HEAD
             'edit' => Pages\EditProject::route('/{record}/edit'),
-=======
-            //'edit' => Pages\EditProject::route('/{record}/edit'),
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
         ];
     }
 }

@@ -15,10 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->double('budget');
-<<<<<<< HEAD
-=======
-            $table->json('attachments');
->>>>>>> 48871c4 (REMIS update on 12-07-2023)
             $table->timestamp('start_at')->nullable();
             $table->timestamp('end_at')->nullable();
             $table->string('project_category')->nullable();
