@@ -15,6 +15,7 @@ class ListProjects extends ListRecords
 
     protected static string $resource = ProjectResource::class;
 
+
     protected function getHeaderActions(): array
     {
         return [
@@ -49,6 +50,11 @@ class ListProjects extends ListRecords
         return [
             ProjectResource\Widgets\StatsProjectOverview::class,
         ];
+    }
+
+    public function fileClicked($state): void
+    {
+        dd($state);
     }
 
 }

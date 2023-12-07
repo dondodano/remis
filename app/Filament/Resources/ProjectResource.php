@@ -325,11 +325,15 @@ class ProjectResource extends Resource
                                         ->listWithLineBreaks()
                                         ->formatStateUsing(function($state){
                                             return basename($state);
-                                        })->extraAttributes([ 
-                                            'wire:click' => '',
-                                            'class' => 'transition hover:text-primary-500 cursor-pointer',
-                                        ]),
-                                        
+                                        }),
+
+                                        // ->extraAttributes(function($record){
+                                        //     return [
+                                        //         'wire:click' => 'fileClicked('.json_encode($record->attachments[0]).')',
+                                        //         'class' => 'transition hover:text-primary-500 cursor-pointer',
+                                        //     ];
+                                        // }),
+
                                 ])->columnSpan(3),
                             ])
                     ]),
