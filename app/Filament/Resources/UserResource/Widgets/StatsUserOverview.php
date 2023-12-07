@@ -25,9 +25,15 @@ class StatsUserOverview extends BaseWidget
         $user = User::query();
 
         return [
-            Stat::make('Record Total',  $this->getPageTableQuery()->count()),
-            Stat::make('Users', $user->whereNot('user_role', 'admin')->whereNot('user_role', 'super')->count()),
-            Stat::make('Proponents',  $user->where('user_role', 'proponent')->count()),
+            Stat::make('Record Total',  $this->getPageTableQuery()->count())
+                ->chart([7, 2, 10, 3, 15, 4, 17])
+                ->color('success'),
+            Stat::make('Users', $user->whereNot('user_role', 'admin')->whereNot('user_role', 'super')->count())
+                ->chart([17, 2, 10, 3, 15, 4, 17])
+                ->color('success'),
+            Stat::make('Proponents',  $user->where('user_role', 'proponent')->count())
+                ->chart([17, 2, 10, 3, 15, 4, 7])
+                ->color('success'),
         ];
     }
 }
