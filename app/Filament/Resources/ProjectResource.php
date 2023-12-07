@@ -18,7 +18,7 @@ use Tables\Actions\CreateAction;
 use Filament\Support\Colors\Color;
 use Filament\Forms\Components\Grid;
 use Filament\Tables\Filters\Filter;
-use Filament\Tables\Grouping\Group;
+use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Actions;
 use Filament\Forms\Components\Section;
@@ -36,6 +36,7 @@ use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Filters\TrashedFilter;
@@ -258,7 +259,10 @@ class ProjectResource extends Resource
                     ->sortable(),
             ])
             ->filters([
-                //
+                TrashedFilter::make(),
+                SelectFilter::make('project_status')
+                    ->label('Project Status')
+                    ->options(ProjectStatus::class),
             ])
             ->actions([
                 ViewAction::make()
@@ -306,5 +310,13 @@ class ProjectResource extends Resource
             'create' => Pages\CreateProject::route('/create'),
             //'edit' => Pages\EditProject::route('/{record}/edit'),
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->withoutGlobalScopes([
+                SoftDeletingScope::class,
+            ]);
     }
 }

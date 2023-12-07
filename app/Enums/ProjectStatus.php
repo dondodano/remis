@@ -5,23 +5,32 @@ use Filament\Notifications\Notification;
 use Filament\Support\Contracts\HasLabel;
 
 enum ProjectStatus: string implements HasLabel{
-    case Pending = 'pending';
-    case Endoresed = 'endoresed';
+
     case Submitted = 'submitted';
-    case Returned = 'returned';
+    case Endorsed = 'endorsed';
+    case Approved = 'approved';
     case Completed = 'completed';
+    case Returned = 'returned';
+    case Pending = 'pending';
     case UnderEvaluation = 'underevaluation';
+    case Withdrawn = 'withdrawn';
+    case Disapproved = 'disapproved';
+
 
     public function getLabel(): ?string
     {
         return match ($this)
         {
-            self::Pending => 'Pending',
-            self::Endoresed => 'Endoresed',
             self::Submitted => 'Submitted',
-            self::Returned => 'Returned',
+            self::Endorsed => 'Endorsed',
+            self::Approved => 'Approved',
             self::Completed => 'Completed',
+            self::Returned => 'Returned',
+            self::Pending => 'Pending',
             self::UnderEvaluation => 'Under Evaluation',
+            self::Withdrawn => 'Withdrawn',
+            self::Disapproved => 'Disapproved',
+
         };
     }
 

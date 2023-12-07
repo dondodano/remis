@@ -11,7 +11,6 @@ use App\Filament\Resources\UserResource\Pages\ListUsers;
 
 class StatsUserOverview extends BaseWidget
 {
-
     use InteractsWithPageTable;
 
     protected static ?string $pollingInterval = null;
@@ -26,9 +25,9 @@ class StatsUserOverview extends BaseWidget
         $user = User::query();
 
         return [
+            Stat::make('Record Total',  $this->getPageTableQuery()->count()),
             Stat::make('Users', $user->whereNot('user_role', 'admin')->whereNot('user_role', 'super')->count()),
             Stat::make('Proponents',  $user->where('user_role', 'proponent')->count()),
-            Stat::make('Record Total',  $this->getPageTableQuery()->count()),
         ];
     }
 }
