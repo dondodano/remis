@@ -28,6 +28,7 @@ class StatsProjectOverview extends BaseWidget
             Stat::make('Endorsed', $project->whereNot('project_status', 'endorsed')->count()),
             Stat::make('Pending',  $project->where('project_status', 'pending')->count()),
             Stat::make('Under Evaluation',  $project->where('project_status', 'underevaluation')->count()),
+            Stat::make('On Going',  $project->where('project_status', 'ongoing')->count()),
             Stat::make('Completed',  $project->where('project_status', 'completed')->count()),
         ];
     }

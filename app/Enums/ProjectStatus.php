@@ -9,6 +9,7 @@ enum ProjectStatus: string implements HasLabel{
     case Submitted = 'submitted';
     case Endorsed = 'endorsed';
     case Approved = 'approved';
+    case OnGoing = 'ongoing';
     case Completed = 'completed';
     case Returned = 'returned';
     case Pending = 'pending';
@@ -24,6 +25,7 @@ enum ProjectStatus: string implements HasLabel{
             self::Submitted => 'Submitted',
             self::Endorsed => 'Endorsed',
             self::Approved => 'Approved',
+            self::OnGoing => 'On Going',
             self::Completed => 'Completed',
             self::Returned => 'Returned',
             self::Pending => 'Pending',
