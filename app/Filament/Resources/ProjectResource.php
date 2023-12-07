@@ -222,18 +222,21 @@ class ProjectResource extends Resource
                     ->stacked()
                     ->limit(3)
                     ->ring(5)
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->overlap(2)
                     ->limitedRemainingText()
                     ->checkFileExistence(false),
-                BadgeColumn::make('start_at')
+
+                TextColumn::make('start_at')
                     ->label('Duration')
+                    ->badge()
                     ->color(Color::Amber)
                     ->formatStateUsing(function($state, Project $project){
                         return date('Y-m-d', strtotime($project->start_at)) .' | '. date('Y-m-d', strtotime($project->end_at));
                     })
                     ->size(TextColumn\TextColumnSize::ExtraSmall)
                     ->searchable()
-                    ->toggleable()
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable(),
                 TextColumn::make('project_category')
                     ->label('Category')
