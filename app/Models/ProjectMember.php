@@ -2,24 +2,32 @@
 
 namespace App\Models;
 
+use App\Enums\MemberRole;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class ProjectProponent extends Model
+class ProjectMember extends Model
 {
-    use HasFactory,  SoftDeletes;
+    use HasFactory;
 
     protected $fillable = [
         'first_name',
         'last_name',
         'avatar',
+        'member_role',
         'project_id',
-        'proponent_type'
     ];
 
-    const DELETED_AT = 'deleted_at';
 
+    protected $casts = [
+        'member_role' => MemberRole::class
+    ];
+
+    public function project(): BelongsTo
+    {
+        return $this->belongsTo(Project::class, 'project_id', 'id');
+    }
 
     /**
      * Override boot

@@ -102,7 +102,9 @@ class ProjectResource extends Resource
                                 TextInput::make('last_name')->required(),
                                 Select::make('member_role')
                                     ->options(MemberRole::class)->columnSpan(2),
-                            ])->columns(2),
+                            ])
+                            ->relationship()
+                            ->columns(2),
                     ]),
 
                     Section::make('Attachments')

@@ -7,6 +7,7 @@ use App\Enums\ProjectStatus;
 use App\Enums\ProjectCategory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Project extends Model
@@ -32,6 +33,11 @@ class Project extends Model
     ];
 
     const DELETED_AT = 'deleted_at';
+
+    public function members(): HasMany
+    {
+        return $this->hasMany(ProjectMember::class, 'project_id', 'id');
+    }
 
     /**
      * Override boot
