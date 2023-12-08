@@ -25,7 +25,6 @@ use Filament\Forms\Components\Actions;
 use Filament\Forms\Components\Section;
 use Filament\Support\Enums\ActionSize;
 use Filament\Support\Enums\FontWeight;
-use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Textarea;
 use Filament\Infolists\Components\Grid;
@@ -44,6 +43,7 @@ use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Filters\TrashedFilter;
+use Filament\Infolists\Components\Fieldset;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteBulkAction;
@@ -104,7 +104,8 @@ class ProjectResource extends Resource
 
                     Section::make('Project Members')
                     ->description('Enter the member involve from the project.')
-                    ->collapsible()
+                    //->collapsible()
+                    ->collapsed()
                     ->columnSpan(2)
                     ->schema([
                         Repeater::make('members')
@@ -138,7 +139,8 @@ class ProjectResource extends Resource
 
                     Section::make('Attachments')
                     ->description('Files acceptable are the following: .pdf, .jpeg,. png, .docx, .xml and .zip')
-                    ->collapsible()
+                    ->collapsed()
+                    //->collapsible()
                     ->schema([
                         FileUpload::make('attachments')
                             ->label('Upload files here')
@@ -282,8 +284,36 @@ class ProjectResource extends Resource
                     ->options(ProjectStatus::class),
             ])
             ->actions([
-                ViewAction::make()
-                    ->label('')->color('gray')->tooltip('View project'),
+                ViewAction::make()->label('')->color('gray')->tooltip('View project'),
+
+                Tables\Actions\Action::make('upload')
+                ->label('')
+                ->icon('heroicon-o-arrow-up-tray')
+                ->color('gray')->tooltip('Upload file')
+                //->url(fn (Project $record): string => ProjectResource::getUrl('upload', ['record' => $record])),
+                ->form([
+                    FileUpload::make('attachments')
+                        ->label('Upload files here')
+                        ->downloadable()
+                        ->reorderable()
+                        ->appendFiles()
+                        ->openable()
+                        ->previewable(false)
+                        ->preserveFilenames()
+                        ->acceptedFileTypes([
+                            'application/pdf',
+                            'image/jpeg',
+                            'image/png',
+                            'application/msword',
+                            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                            'application/vnd.ms-excel',
+                            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                            'application/x-zip-compressed'
+                        ])
+                        ->disk('local')
+                        ->directory('/public/attachments/'. randomStr())
+                    ->multiple(),
+                ]),
 
                 EditAction::make()
                 ->label('')->color('gray')->tooltip('Edit project')
@@ -375,7 +405,7 @@ class ProjectResource extends Resource
                 Grid::make(3)
                 ->schema([
                     TextEntry::make('title')
-                        ->icon('heroicon-m-folder')
+                        ->icon('heroicon-m-rectangle-group')
                         ->size(TextEntry\TextEntrySize::Medium)
                         ->weight(FontWeight::Bold)
                         ->label('Project Title')
@@ -417,6 +447,16 @@ class ProjectResource extends Resource
                             return ucwords($state->first_name .' '. $state->last_name);
                         }),
 
+                    Fieldset::make('Attachment')
+                        ->schema([
+                            TextEntry::make('attachments')
+                                ->label('')
+                                ->icon('heroicon-m-paper-clip')
+                                ->formatStateUsing(function(string $state){
+                                    return basename($state);
+                                })
+                                ->listWithLineBreaks(),
+                        ]),
                 ])
             ]);
     }
@@ -433,6 +473,7 @@ class ProjectResource extends Resource
             'index' => Pages\ListProjects::route('/'),
             'create' => Pages\CreateProject::route('/create'),
             //'edit' => Pages\EditProject::route('/{record}/edit'),
+            //'upload' => Pages\UploadProjectAttachment::route('/{record}/upload'),
         ];
     }
 
