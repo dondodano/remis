@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('project_members', function (Blueprint $table) {
+        Schema::create('project_attachments', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('avatar')->nullable();
-            $table->string('member_role');
+            $table->string('file_path');
             $table->integer('project_id');
             $table->timestamps();
         });
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('project_members');
+        Schema::dropIfExists('project_attachments');
     }
 };

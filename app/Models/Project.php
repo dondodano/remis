@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\FundCategory;
 use App\Enums\ProjectStatus;
 use App\Enums\ProjectCategory;
+use App\Models\ProjectAttachment;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -37,6 +38,11 @@ class Project extends Model
     public function members(): HasMany
     {
         return $this->hasMany(ProjectMember::class, 'project_id', 'id');
+    }
+
+    public function documents(): HasMany
+    {
+        return $this->hasMany(ProjectAttachment::class,'project_id', 'id');
     }
 
     /**

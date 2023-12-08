@@ -21,25 +21,23 @@ class StatsProjectOverview extends BaseWidget
 
     protected function getStats(): array
     {
-        $project = Project::query();
-
         return [
             Stat::make('Record Total',  $this->getPageTableQuery()->count())
                 ->chart([7, 2, 10, 3, 15, 4, 17])
                 ->color('success'),
-            Stat::make('Endorsed', $project->whereNot('project_status', 'endorsed')->count())
+            Stat::make('Endorsed', Project::where('project_status', 'endorsed')->count())
                 ->chart([17, 2, 10, 3, 15, 4, 17])
                 ->color('success'),
-            Stat::make('Pending',  $project->where('project_status', 'pending')->count())
+            Stat::make('Pending',  Project::where('project_status', 'pending')->count())
                 ->chart([17, 2, 10, 3, 15, 4, 7])
                 ->color('success'),
-            Stat::make('Under Evaluation',  $project->where('project_status', 'underevaluation')->count())
+            Stat::make('Under Evaluation',  Project::where('project_status', 'underevaluation')->count())
                 ->chart([7, 2, 10, 3, 15, 4, 17])
                 ->color('primary'),
-            Stat::make('On Going',  $project->where('project_status', 'ongoing')->count())
+            Stat::make('On Going',  Project::where('project_status', 'ongoing')->count())
                 ->chart([17, 2, 10, 3, 15, 4, 17])
                 ->color('primary'),
-            Stat::make('Completed',  $project->where('project_status', 'completed')->count())
+            Stat::make('Completed',  Project::where('project_status', 'completed')->count())
                 ->chart([17, 2, 10, 3, 15, 4, 7])
                 ->color('primary'),
         ];

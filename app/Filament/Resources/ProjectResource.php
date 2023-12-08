@@ -15,6 +15,7 @@ use App\Models\ProjectMember;
 use App\Enums\ProjectCategory;
 use Filament\Resources\Resource;
 use Tables\Actions\CreateAction;
+use App\Models\ProjectAttachment;
 use Filament\Support\Colors\Color;
 use Filament\Tables\Filters\Filter;
 use Filament\Forms\Components\Group;
@@ -23,6 +24,7 @@ use Filament\Forms\Components\Actions;
 use Filament\Forms\Components\Section;
 use Filament\Support\Enums\ActionSize;
 use Filament\Support\Enums\FontWeight;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Textarea;
 use Filament\Infolists\Components\Grid;
@@ -41,12 +43,13 @@ use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Filters\TrashedFilter;
-use Filament\Infolists\Components\Fieldset;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteBulkAction;
 use App\Filament\Resources\ProjectResource\Pages;
+use Filament\Infolists\Components\RepeatableEntry;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\ProjectResource\RelationManagers\DocumentsRelationManager;
 
 
 class ProjectResource extends Resource
@@ -104,9 +107,11 @@ class ProjectResource extends Resource
                     ->columnSpan(2)
                     ->schema([
                         Repeater::make('members')
+                            ->relationship()
+                            ->addActionLabel('Add new project member')
                             ->schema([
-                                TextInput::make('first_name')->autocapitalize()->required(),
-                                TextInput::make('last_name')->autocapitalize()->required(),
+                                TextInput::make('first_name')->autocapitalize('words')->required(),
+                                TextInput::make('last_name')->autocapitalize('words')->required(),
                                 Select::make('member_role')
                                     ->default('member')
                                     ->options(MemberRole::class)->columnSpan(2),
@@ -122,8 +127,11 @@ class ProjectResource extends Resource
                                 ];
                                 return $data;
                             })
-                            ->reorderableWithButtons()
-                            ->relationship()
+                            ->defaultItems(2)
+                            ->reorderable()
+                            ->reorderableWithDragAndDrop()
+                            ->cloneable()
+                            ->collapsible()
                             ->columns(2),
                     ]),
 
@@ -261,6 +269,10 @@ class ProjectResource extends Resource
                     ->searchable()
                     ->toggleable()
                     ->sortable(),
+                TextColumn::make('created_at')
+                    ->label('Created')
+                    ->icon('heroicon-m-clock')
+                    ->since(),
             ])
             ->filters([
                 TrashedFilter::make(),
@@ -270,7 +282,7 @@ class ProjectResource extends Resource
             ])
             ->actions([
                 ViewAction::make()
-                ->label('')->color('gray')->tooltip('View project')
+                    ->label('')->color('gray')->tooltip('View project')
                     ->infolist([
                         Grid::make(3)
                             ->schema([
@@ -317,24 +329,6 @@ class ProjectResource extends Resource
                                         return ucwords($state->first_name .' '. $state->last_name);
                                     }),
 
-                                Fieldset::make('Attachments')
-                                ->schema([
-                                    TextEntry::make('attachments')
-                                        ->label('')
-                                        ->icon('heroicon-m-bookmark')
-                                        ->listWithLineBreaks()
-                                        ->formatStateUsing(function($state){
-                                            return basename($state);
-                                        }),
-
-                                        // ->extraAttributes(function($record){
-                                        //     return [
-                                        //         'wire:click' => 'fileClicked('.json_encode($record->attachments[0]).')',
-                                        //         'class' => 'transition hover:text-primary-500 cursor-pointer',
-                                        //     ];
-                                        // }),
-
-                                ])->columnSpan(3),
                             ])
                     ]),
 
@@ -342,6 +336,64 @@ class ProjectResource extends Resource
                 ->label('')->color('gray')->tooltip('Edit project')
                     //methods below can be executed when edit is on modal
                     ->mutateFormDataUsing(function (array $data): array {
+                        $project = static::getModel()::first();
+                        $projectAttachment = ProjectAttachment::where('project_id', $project->id);
+                        $files = $data['attachments'];
+
+                        if( count($files) == $projectAttachment->count())
+                        {
+                            //update
+                            foreach($files as $file)
+                            {
+                                ProjectAttachment::where('project_id', $project->id)
+                                    ->update([
+                                        'file_path' => $file
+                                    ]);
+                            }
+                        }
+
+                        if(count($files) > $projectAttachment->count())
+                        {
+                            //update & insert
+                            foreach($files as $file)
+                            {
+                                ProjectAttachment::updateOrCreate([
+                                        'file_path' => $file,
+                                        'project_id' => $project->id
+                                    ]);
+                            }
+                        }
+
+                        if(count($files) < $projectAttachment->count())
+                        {
+                            $fileOnly = [];
+                            foreach($projectAttachment->get()->toArray() as $item)
+                            {
+                                array_push($fileOnly, $item['file_path']);
+                            }
+
+                            $removedFiles = array_merge(
+                                array_diff($fileOnly, $files),
+                                array_diff($files, $fileOnly)
+                            );
+
+                            foreach($removedFiles as $rmFile)
+                            {
+                                ProjectAttachment::where('file_path', $rmFile)
+                                    ->where('project_id', $project->id)->delete();
+                            }
+
+
+                            //delete & update
+                            foreach($files as $file)
+                            {
+                                ProjectAttachment::updateOrCreate([
+                                    'file_path' => $file,
+                                    'project_id' => $project->id
+                                ]);
+                            }
+
+                        }
                         return $data;
                     })->successNotification(
                         Notification::make()
@@ -366,7 +418,6 @@ class ProjectResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
         ];
     }
 
