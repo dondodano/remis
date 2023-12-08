@@ -13,6 +13,7 @@ use App\Enums\FundCategory;
 use App\Enums\ProjectStatus;
 use App\Models\ProjectMember;
 use App\Enums\ProjectCategory;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Tables\Actions\CreateAction;
 use App\Models\ProjectAttachment;
@@ -282,55 +283,7 @@ class ProjectResource extends Resource
             ])
             ->actions([
                 ViewAction::make()
-                    ->label('')->color('gray')->tooltip('View project')
-                    ->infolist([
-                        Grid::make(3)
-                            ->schema([
-                                TextEntry::make('title')
-                                    ->icon('heroicon-m-folder')
-                                    ->size(TextEntry\TextEntrySize::Medium)
-                                    ->weight(FontWeight::Bold)
-                                    ->label('Project Title')
-                                    ->columnSpan(3),
-                                TextEntry::make('budget')
-                                    ->icon('heroicon-m-banknotes')
-                                    ->label('Budget')
-                                    ->money('PHP')
-                                    ->badge()
-                                    ->color(Color::Blue),
-                                TextEntry::make('start_at')
-                                    ->icon('heroicon-m-calendar')
-                                    ->label('Budget')
-                                    ->money('PHP')
-                                    ->badge()
-                                    ->color(Color::Amber)
-                                    ->formatStateUsing(function($state, Project $project){
-                                        return date('Y-m-d', strtotime($project->start_at)) .' | '. date('Y-m-d', strtotime($project->end_at));
-                                    }),
-                                TextEntry::make('project_category')
-                                    ->icon('heroicon-m-tag')
-                                    ->badge()
-                                    ->color(Color::Blue)
-                                    ->label('Category'),
-                                TextEntry::make('fund_category')
-                                    ->icon('heroicon-m-tag')
-                                    ->badge()
-                                    ->color(Color::Green)
-                                    ->label('Fund'),
-                                TextEntry::make('project_status')
-                                    ->icon('heroicon-m-tag')
-                                    ->badge()
-                                    ->color(Color::Indigo)
-                                    ->label('Status'),
-                                TextEntry::make('members')
-                                    ->icon('heroicon-m-user-circle')
-                                    ->listWithLineBreaks()
-                                    ->formatStateUsing(function($state){
-                                        return ucwords($state->first_name .' '. $state->last_name);
-                                    }),
-
-                            ])
-                    ]),
+                    ->label('')->color('gray')->tooltip('View project'),
 
                 EditAction::make()
                 ->label('')->color('gray')->tooltip('Edit project')
@@ -413,6 +366,59 @@ class ProjectResource extends Resource
                     ->icon('heroicon-m-plus'),
             ])
             ->emptyStateDescription('Once you add new project, it will appear here.');
+    }
+
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                Grid::make(3)
+                ->schema([
+                    TextEntry::make('title')
+                        ->icon('heroicon-m-folder')
+                        ->size(TextEntry\TextEntrySize::Medium)
+                        ->weight(FontWeight::Bold)
+                        ->label('Project Title')
+                        ->columnSpan(3),
+                    TextEntry::make('budget')
+                        ->icon('heroicon-m-banknotes')
+                        ->label('Budget')
+                        ->money('PHP')
+                        ->badge()
+                        ->color(Color::Blue),
+                    TextEntry::make('start_at')
+                        ->icon('heroicon-m-calendar')
+                        ->label('Budget')
+                        ->money('PHP')
+                        ->badge()
+                        ->color(Color::Amber)
+                        ->formatStateUsing(function($state, Project $project){
+                            return date('Y-m-d', strtotime($project->start_at)) .' | '. date('Y-m-d', strtotime($project->end_at));
+                        }),
+                    TextEntry::make('project_category')
+                        ->icon('heroicon-m-tag')
+                        ->badge()
+                        ->color(Color::Blue)
+                        ->label('Category'),
+                    TextEntry::make('fund_category')
+                        ->icon('heroicon-m-tag')
+                        ->badge()
+                        ->color(Color::Green)
+                        ->label('Fund'),
+                    TextEntry::make('project_status')
+                        ->icon('heroicon-m-tag')
+                        ->badge()
+                        ->color(Color::Indigo)
+                        ->label('Status'),
+                    TextEntry::make('members')
+                        ->icon('heroicon-m-user-circle')
+                        ->listWithLineBreaks()
+                        ->formatStateUsing(function($state){
+                            return ucwords($state->first_name .' '. $state->last_name);
+                        }),
+
+                ])
+            ]);
     }
 
     public static function getRelations(): array
