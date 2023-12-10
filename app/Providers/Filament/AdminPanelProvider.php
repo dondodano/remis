@@ -9,13 +9,14 @@ use Filament\PanelProvider;
 use Filament\Pages\Dashboard;
 use Filament\Navigation\MenuItem;
 use Filament\Support\Colors\Color;
+use Filament\Pages\Auth\EditProfile;
 use Filament\Navigation\NavigationItem;
-use App\Filament\Pages\Auth\EditProfile;
 use Filament\Navigation\NavigationGroup;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Navigation\NavigationBuilder;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
+use Awcodes\FilamentQuickCreate\QuickCreatePlugin;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
@@ -81,6 +82,13 @@ class AdminPanelProvider extends PanelProvider
                         MyImages::make()
                             ->directory('storage/media/backgrounds/')
                     ),
+                QuickCreatePlugin::make()
+                    ->includes([
+                        \App\Filament\Resources\UserResource::class,
+                        \App\Filament\Resources\ProjectResource::class,
+                    ])
+                    ->sortBy('navigation')
+                    ->slideOver(),
             ]);
     }
 }
