@@ -18,6 +18,7 @@ use Filament\Resources\Resource;
 use Tables\Actions\CreateAction;
 use App\Models\ProjectAttachment;
 use Filament\Support\Colors\Color;
+use Illuminate\Support\HtmlString;
 use Filament\Tables\Filters\Filter;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Select;
@@ -290,7 +291,6 @@ class ProjectResource extends Resource
                 ->label('')
                 ->icon('heroicon-o-arrow-up-tray')
                 ->color('gray')->tooltip('Upload file')
-                //->url(fn (Project $record): string => ProjectResource::getUrl('upload', ['record' => $record])),
                 ->form([
                     FileUpload::make('attachments')
                         ->label('Upload files here')
@@ -453,8 +453,19 @@ class ProjectResource extends Resource
                                 ->label('')
                                 ->icon('heroicon-m-paper-clip')
                                 ->formatStateUsing(function(string $state){
-                                    return basename($state);
+                                    $urlSegment = explode('/', $state);
+                                    $urlArray = [
+                                        'storage',
+                                        $urlSegment[1],
+                                        $urlSegment[2],
+                                        $urlSegment[3]
+                                    ];
+
+                                    $newUrl = implode('/', $urlArray);
+
+                                    return new HtmlString('<a href="../'.$newUrl.'" target="_blank">'.basename($state).'</a>');
                                 })
+                                ->helperText('Click each attachment to view.')
                                 ->listWithLineBreaks(),
                         ]),
                 ])
