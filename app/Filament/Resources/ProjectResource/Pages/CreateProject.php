@@ -14,6 +14,8 @@ class CreateProject extends CreateRecord
 {
     protected static string $resource = ProjectResource::class;
 
+    protected static string $modelId;
+
     protected function getCreatedNotification(): ?Notification
     {
         return Notification::make()
@@ -22,25 +24,28 @@ class CreateProject extends CreateRecord
             ->body('The project has been created successfully.');
     }
 
+
+    /**
+     * Note : Faile to store ProjectAttachment to get Relationship
+     */
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        $project = static::getModel()::first();
 
-        $projectAttachment = ProjectAttachment::where('project_id', $project->id);
+        // $projectAttachment = ProjectAttachment::where('project_id', $project->id);
 
-        $files = $data['attachments'];
+        // $files = $data['attachments'];
 
-        if(count($files) > $projectAttachment->count())
-        {
-            //update & insert
-            foreach($files as $file)
-            {
-                ProjectAttachment::updateOrCreate([
-                        'file_path' => $file,
-                        'project_id' => $project->id
-                    ]);
-            }
-        }
+        // if(count($files) > $projectAttachment->count())
+        // {
+        //     //update & insert
+        //     foreach($files as $file)
+        //     {
+        //         ProjectAttachment::updateOrCreate([
+        //                 'file_path' => $file,
+        //                 'project_id' => $project->id
+        //             ]);
+        //     }
+        // }
 
         return $data;
     }

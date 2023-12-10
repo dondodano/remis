@@ -40,10 +40,10 @@ class Project extends Model
         return $this->hasMany(ProjectMember::class, 'project_id', 'id');
     }
 
-    public function documents(): HasMany
-    {
-        return $this->hasMany(ProjectAttachment::class,'project_id', 'id');
-    }
+    // public function documents(): HasMany
+    // {
+    //     return $this->hasMany(ProjectAttachment::class,'project_id', 'id');
+    // }
 
     /**
      * Override boot
