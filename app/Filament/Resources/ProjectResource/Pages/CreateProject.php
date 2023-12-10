@@ -24,29 +24,29 @@ class CreateProject extends CreateRecord
             ->body('The project has been created successfully.');
     }
 
+    protected function handleRecordCreation(array $data): Model
+    {
+        $project = static::getModel()::create($data);
+        $projectAttachment = ProjectAttachment::where('project_id', $project->id);
 
-    /**
-     * Note : Faile to store ProjectAttachment to get Relationship
-     */
+        $files = $data['attachments'];
+
+        if(count($files) > $projectAttachment->count())
+        {
+            //update & insert
+            foreach($files as $file)
+            {
+                ProjectAttachment::updateOrCreate([
+                        'file_path' => $file,
+                        'project_id' => $project->id
+                    ]);
+            }
+        }
+        return $project;
+    }
+
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-
-        // $projectAttachment = ProjectAttachment::where('project_id', $project->id);
-
-        // $files = $data['attachments'];
-
-        // if(count($files) > $projectAttachment->count())
-        // {
-        //     //update & insert
-        //     foreach($files as $file)
-        //     {
-        //         ProjectAttachment::updateOrCreate([
-        //                 'file_path' => $file,
-        //                 'project_id' => $project->id
-        //             ]);
-        //     }
-        // }
-
         return $data;
     }
 }
