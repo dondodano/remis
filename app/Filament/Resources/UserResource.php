@@ -192,11 +192,23 @@ class UserResource extends Resource
 
                 // Action : Restore
                 Tables\Actions\RestoreAction::make()->label('')->color('gray')
-                    ->tooltip('Restore user'),
+                    ->tooltip('Restore user')
+                    ->successNotification(
+                        Notification::make()
+                            ->success()
+                            ->title('User restored')
+                            ->body("The user has been restored successfully."),
+                    ),
 
                 // Action Group : of Delete , Approve and Disapprove User
                 ActionGroup::make([
-                    Tables\Actions\DeleteAction::make()->label('Delete')->color('gray'),
+                    Tables\Actions\DeleteAction::make()->label('Delete')->color('gray')
+                    ->successNotification(
+                        Notification::make()
+                            ->success()
+                            ->title('User deleted')
+                            ->body("The user has been deleted successfully."),
+                    ),
 
 
                     Tables\Actions\Action::make('disprove-verification')

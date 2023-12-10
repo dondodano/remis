@@ -360,58 +360,55 @@ class ProjectResource extends Resource
 
                 RestoreAction::make()
                 ->label('')->color('gray')->tooltip('Restore project')
-                ->after(function (RestoreAction $action, Project $project) {
-                    Project::withTrashed()->find($project->id)->restore();
+                ->successNotification(
                     Notification::make()
                         ->success()
                         ->title('Project restored')
-                        ->body("The {$project->title} has been deleted successfully.");
-                }),
+                        ->body("The project has been restored successfully."),
+                ),
 
                 ActionGroup::make([
                     ViewAction::make()->label('View')->color('gray')
                         ->hidden(fn ($record) => !is_null($record->deleted_at)),
 
                     Tables\Actions\Action::make('upload')
-                    ->label('Upload')
-                    ->icon('heroicon-o-arrow-up-tray')
-                    ->color('gray')
-                    ->form([
-                        FileUpload::make('attachments')
-                            ->label('Upload files here')
-                            ->downloadable()
-                            ->reorderable()
-                            ->appendFiles()
-                            ->openable()
-                            ->previewable(false)
-                            ->preserveFilenames()
-                            ->acceptedFileTypes([
-                                'application/pdf',
-                                'image/jpeg',
-                                'image/png',
-                                'application/msword',
-                                'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-                                'application/vnd.ms-excel',
-                                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-                                'application/x-zip-compressed'
-                            ])
-                            ->disk('local')
-                            ->directory('/public/attachments/'. randomStr())
-                        ->multiple(),
-                    ])
+                        ->label('Upload')
+                        ->icon('heroicon-o-arrow-up-tray')
+                        ->color('gray')
+                        ->form([
+                            FileUpload::make('attachments')
+                                ->label('Upload files here')
+                                ->downloadable()
+                                ->reorderable()
+                                ->appendFiles()
+                                ->openable()
+                                ->previewable(false)
+                                ->preserveFilenames()
+                                ->acceptedFileTypes([
+                                    'application/pdf',
+                                    'image/jpeg',
+                                    'image/png',
+                                    'application/msword',
+                                    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                                    'application/vnd.ms-excel',
+                                    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                                    'application/x-zip-compressed'
+                                ])
+                                ->disk('local')
+                                ->directory('/public/attachments/'. randomStr())
+                            ->multiple(),
+                        ])
                     ->hidden(fn ($record) => !is_null($record->deleted_at)),
 
                     DeleteAction::make()
                     ->label('Delete')->color('gray')
                     ->hidden(fn ($record) => !is_null($record->deleted_at))
-                    ->after(function (DeleteAction $action, Project $project) {
-                        $project->delete();
-
+                    ->successNotification(
                         Notification::make()
                             ->success()
                             ->title('Project deleted')
-                            ->body("The {$project->title} has been deleted successfully.");
-                    }),
+                            ->body("The project has been deleted successfully."),
+                    ),
                 ])
             ])
             ->bulkActions([
