@@ -170,7 +170,8 @@ class UserResource extends Resource
                             ->success()
                             ->duration(2000)
                             ->send();
-                    })->color('gray')->tooltip('Send credentials to email'),
+                    })->color('gray')->tooltip('Send credentials to email')
+                    ->hidden(fn ($record) => !is_null($record->deleted_at)),
 
                 // Action : Edit User on Modal
                 Tables\Actions\EditAction::make()
@@ -187,12 +188,16 @@ class UserResource extends Resource
                             ->success()
                             ->title('User updated')
                             ->body('The user has been saved successfully.'),
-                    ),
+                    )->hidden(fn ($record) => !is_null($record->deleted_at)),
+
+                // Action : Restore
+                Tables\Actions\RestoreAction::make()->label('')->color('gray')
+                    ->tooltip('Restore user'),
 
                 // Action Group : of Delete , Approve and Disapprove User
                 ActionGroup::make([
                     Tables\Actions\DeleteAction::make()->label('Delete')->color('gray'),
-                    Tables\Actions\RestoreAction::make()->label('Restore')->color('gray'),
+
 
                     Tables\Actions\Action::make('disprove-verification')
                         ->label('Disprove Verification')

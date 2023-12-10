@@ -40,8 +40,10 @@ use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
+use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Actions\RestoreAction;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Infolists\Components\Fieldset;
@@ -285,36 +287,6 @@ class ProjectResource extends Resource
                     ->options(ProjectStatus::class),
             ])
             ->actions([
-                ViewAction::make()->label('')->color('gray')->tooltip('View project'),
-
-                Tables\Actions\Action::make('upload')
-                ->label('')
-                ->icon('heroicon-o-arrow-up-tray')
-                ->color('gray')->tooltip('Upload file')
-                ->form([
-                    FileUpload::make('attachments')
-                        ->label('Upload files here')
-                        ->downloadable()
-                        ->reorderable()
-                        ->appendFiles()
-                        ->openable()
-                        ->previewable(false)
-                        ->preserveFilenames()
-                        ->acceptedFileTypes([
-                            'application/pdf',
-                            'image/jpeg',
-                            'image/png',
-                            'application/msword',
-                            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-                            'application/vnd.ms-excel',
-                            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-                            'application/x-zip-compressed'
-                        ])
-                        ->disk('local')
-                        ->directory('/public/attachments/'. randomStr())
-                    ->multiple(),
-                ]),
-
                 EditAction::make()
                 ->label('')->color('gray')->tooltip('Edit project')
                     //methods below can be executed when edit is on modal
@@ -383,7 +355,64 @@ class ProjectResource extends Resource
                             ->success()
                             ->title('Project updated')
                             ->body('The project has been saved successfully.'),
-                    ),
+                    )
+                ->hidden(fn ($record) => !is_null($record->deleted_at)),
+
+                RestoreAction::make()
+                ->label('')->color('gray')->tooltip('Restore project')
+                ->after(function (RestoreAction $action, Project $project) {
+                    Project::withTrashed()->find($project->id)->restore();
+                    Notification::make()
+                        ->success()
+                        ->title('Project restored')
+                        ->body("The {$project->title} has been deleted successfully.");
+                }),
+
+                ActionGroup::make([
+                    ViewAction::make()->label('View')->color('gray')
+                        ->hidden(fn ($record) => !is_null($record->deleted_at)),
+
+                    Tables\Actions\Action::make('upload')
+                    ->label('Upload')
+                    ->icon('heroicon-o-arrow-up-tray')
+                    ->color('gray')
+                    ->form([
+                        FileUpload::make('attachments')
+                            ->label('Upload files here')
+                            ->downloadable()
+                            ->reorderable()
+                            ->appendFiles()
+                            ->openable()
+                            ->previewable(false)
+                            ->preserveFilenames()
+                            ->acceptedFileTypes([
+                                'application/pdf',
+                                'image/jpeg',
+                                'image/png',
+                                'application/msword',
+                                'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                                'application/vnd.ms-excel',
+                                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                                'application/x-zip-compressed'
+                            ])
+                            ->disk('local')
+                            ->directory('/public/attachments/'. randomStr())
+                        ->multiple(),
+                    ])
+                    ->hidden(fn ($record) => !is_null($record->deleted_at)),
+
+                    DeleteAction::make()
+                    ->label('Delete')->color('gray')
+                    ->hidden(fn ($record) => !is_null($record->deleted_at))
+                    ->after(function (DeleteAction $action, Project $project) {
+                        $project->delete();
+
+                        Notification::make()
+                            ->success()
+                            ->title('Project deleted')
+                            ->body("The {$project->title} has been deleted successfully.");
+                    }),
+                ])
             ])
             ->bulkActions([
                 BulkActionGroup::make([
