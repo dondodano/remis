@@ -371,34 +371,34 @@ class ProjectResource extends Resource
                     ViewAction::make()->label('View')->color('gray')
                         ->hidden(fn ($record) => !is_null($record->deleted_at)),
 
-                    Tables\Actions\Action::make('upload')
-                        ->label('Upload')
-                        ->icon('heroicon-o-arrow-up-tray')
-                        ->color('gray')
-                        ->form([
-                            FileUpload::make('attachments')
-                                ->label('Upload files here')
-                                ->downloadable()
-                                ->reorderable()
-                                ->appendFiles()
-                                ->openable()
-                                ->previewable(false)
-                                ->preserveFilenames()
-                                ->acceptedFileTypes([
-                                    'application/pdf',
-                                    'image/jpeg',
-                                    'image/png',
-                                    'application/msword',
-                                    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-                                    'application/vnd.ms-excel',
-                                    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-                                    'application/x-zip-compressed'
-                                ])
-                                ->disk('local')
-                                ->directory('/public/attachments/'. randomStr())
-                            ->multiple(),
-                        ])
-                    ->hidden(fn ($record) => !is_null($record->deleted_at)),
+                    // Tables\Actions\Action::make('upload')
+                    //     ->label('Upload')
+                    //     ->icon('heroicon-o-arrow-up-tray')
+                    //     ->color('gray')
+                    //     ->form([
+                    //         FileUpload::make('attachments')
+                    //             ->label('Upload files here')
+                    //             ->downloadable()
+                    //             ->reorderable()
+                    //             ->appendFiles()
+                    //             ->openable()
+                    //             ->previewable(false)
+                    //             ->preserveFilenames()
+                    //             ->acceptedFileTypes([
+                    //                 'application/pdf',
+                    //                 'image/jpeg',
+                    //                 'image/png',
+                    //                 'application/msword',
+                    //                 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                    //                 'application/vnd.ms-excel',
+                    //                 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                    //                 'application/x-zip-compressed'
+                    //             ])
+                    //             ->disk('local')
+                    //             ->directory('/public/attachments/'. randomStr())
+                    //         ->multiple(),
+                    //     ])
+                    // ->hidden(fn ($record) => !is_null($record->deleted_at)),
 
                     DeleteAction::make()
                     ->label('Delete')->color('gray')
@@ -410,6 +410,10 @@ class ProjectResource extends Resource
                             ->body("The project has been deleted successfully."),
                     ),
                 ])
+                ->tooltip('More actions...')
+                ->icon('heroicon-m-ellipsis-vertical')
+                ->size(ActionSize::Small)
+                ->color('gray')
             ])
             ->bulkActions([
                 BulkActionGroup::make([
