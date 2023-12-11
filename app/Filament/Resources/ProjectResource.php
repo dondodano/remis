@@ -19,6 +19,7 @@ use Tables\Actions\CreateAction;
 use App\Models\ProjectAttachment;
 use Filament\Support\Colors\Color;
 use Illuminate\Support\HtmlString;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Filters\Filter;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Select;
@@ -358,9 +359,20 @@ class ProjectResource extends Resource
                     )
                 ->hidden(fn ($record) => !is_null($record->deleted_at)),
 
+
+                Action::make('evaluate')
+                    ->label('')->color('gray')
+                    ->icon('heroicon-m-queue-list')
+                    ->tooltip('Evaluate Proposal')
+                    ->url( function(Project $record){
+                        return route('project.evaluate', [
+                            $record
+                        ]);
+                    }),
+
                 RestoreAction::make()
-                ->label('')->color('gray')->tooltip('Restore project')
-                ->successNotification(
+                    ->label('')->color('gray')->tooltip('Restore project')
+                    ->successNotification(
                     Notification::make()
                         ->success()
                         ->title('Project restored')
@@ -515,6 +527,8 @@ class ProjectResource extends Resource
             'create' => Pages\CreateProject::route('/create'),
             //'edit' => Pages\EditProject::route('/{record}/edit'),
             //'upload' => Pages\UploadProjectAttachment::route('/{record}/upload'),
+
+            'evaluate' => Pages\EvaluateProject::route('/{record}/evaluate'),
         ];
     }
 

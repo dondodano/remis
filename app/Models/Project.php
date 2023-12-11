@@ -6,6 +6,7 @@ use App\Enums\FundCategory;
 use App\Enums\ProjectStatus;
 use App\Enums\ProjectCategory;
 use App\Models\ProjectAttachment;
+use App\Models\ProjectEvaluation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -43,6 +44,11 @@ class Project extends Model
     public function documents(): HasMany
     {
         return $this->hasMany(ProjectAttachment::class,'project_id', 'id');
+    }
+
+    public function evaluations(): HasMany
+    {
+        return $this->hasMany(ProjectEvaluation::class,'project_id', 'id');
     }
 
     /**

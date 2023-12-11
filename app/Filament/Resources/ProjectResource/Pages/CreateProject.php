@@ -14,8 +14,6 @@ class CreateProject extends CreateRecord
 {
     protected static string $resource = ProjectResource::class;
 
-    protected static string $modelId;
-
     protected function getCreatedNotification(): ?Notification
     {
         return Notification::make()

@@ -15,10 +15,10 @@ class ProjectAttachment extends Model
         'project_id',
     ];
 
-    // public function project(): BelongsTo
-    // {
-    //     return $this->belongsTo(Project::class, 'project_id', 'id');
-    // }
+    public function project(): BelongsTo
+    {
+        return $this->belongsTo(Project::class, 'project_id', 'id');
+    }
 
     /**
      * Override boot
