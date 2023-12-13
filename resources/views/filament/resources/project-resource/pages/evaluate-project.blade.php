@@ -5,6 +5,11 @@
     </x-filament::grid>
     @endif --}}
 
+    <table>
+        <thead>
+            <tr><td>TEST</td></tr>
+        </thead>
+    </table>
     <x-filament-panels::form wire:submit="save">
         {{ $this->form }}
     </x-filament-panels::form>
