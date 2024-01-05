@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "caf9c932c849c5d972ed42bd6bd91a5d",
+    "content-hash": "b1b78cc0d863d2ab6a9de3349a7a8222",
     "packages": [
         {
             "name": "archilex/filament-toggle-icon-column",
