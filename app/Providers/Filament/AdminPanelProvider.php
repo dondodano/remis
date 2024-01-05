@@ -27,6 +27,7 @@ use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Dasundev\FilamentAccessSecret\Middleware\VerifyAdminAccessSecret;
+use Brickx\MaintenanceSwitch\MaintenanceSwitchPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -89,6 +90,7 @@ class AdminPanelProvider extends PanelProvider
                     ])
                     ->sortBy('navigation')
                     ->slideOver(),
+                MaintenanceSwitchPlugin::make(),
             ]);
     }
 }

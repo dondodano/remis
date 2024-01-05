@@ -14,6 +14,7 @@
         "awcodes/shout": "^2.0",
         "barryvdh/laravel-dompdf": "^2.0",
         "bezhansalleh/filament-shield": "^3.1",
+        "brickx/maintenance-switch": "^1.0",
         "cjmellor/level-up": "^1.1",
         "emreyarligan/enum-concern": "^1.0",
         "eneadm/ladder": "^1.2",
