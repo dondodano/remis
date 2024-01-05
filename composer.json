@@ -14,6 +14,9 @@
         "awcodes/shout": "^2.0",
         "barryvdh/laravel-dompdf": "^2.0",
         "bezhansalleh/filament-shield": "^3.1",
+        "cjmellor/level-up": "^1.1",
+        "emreyarligan/enum-concern": "^1.0",
+        "eneadm/ladder": "^1.2",
         "filament/actions": "^3.0",
         "filament/filament": "^3.1",
         "filament/forms": "^3.1",
@@ -28,11 +31,14 @@
         "laravel/tinker": "^2.8",
         "laravolt/avatar": "^5.0",
         "leandrocfe/filament-apex-charts": "3.0",
+        "mchev/banhammer": "^1.2",
         "nunomaduro/termwind": "^1.15",
+        "opcodesio/log-viewer": "^3.1",
         "pxlrbt/filament-spotlight": "^1.0",
         "saade/filament-fullcalendar": "3.0",
         "shuvroroy/filament-spatie-laravel-backup": "^2.1",
-        "swisnl/filament-backgrounds": "^1.1"
+        "swisnl/filament-backgrounds": "^1.1",
+        "wnx/laravel-backup-restore": "^1.1"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.13",
