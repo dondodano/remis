@@ -5,12 +5,13 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\UserRole;
 use Laravel\Sanctum\HasApiTokens;
+use Filament\Models\Contracts\HasName;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasName
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
@@ -53,6 +54,13 @@ class User extends Authenticatable
     ];
 
     const DELETED_AT = 'deleted_at';
+
+
+
+    public function getFilamentName(): string
+    {
+        return $this->getAttributeValue('first_name').' '.$this->getAttributeValue('last_name');
+    }
 
 
     /**
