@@ -12,3 +12,13 @@ function randomStr($length = 10) {
     }
     return $randomString;
 }
+
+/**
+ * Function to format size Units
+ */
+function formatSizeUnits($bytes)
+{
+    $units = ['B', 'KB', 'MB', 'GB', 'TB'];
+    $i = floor(log($bytes, 1024));
+    return number_format($bytes / (1024 ** $i), 2) . ' ' . $units[$i];
+}
