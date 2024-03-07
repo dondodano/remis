@@ -3,6 +3,10 @@
 namespace App\Filament\Pages;
 
 use Filament\Pages\Page;
+use Filament\Tables\Table;
+use Tables\Actions\CreateAction;
+use Filament\Tables\Contracts\HasTable;
+use Filament\Tables\Concerns\InteractsWithTable;
 
 class Files extends Page
 {
@@ -14,8 +18,4 @@ class Files extends Page
 
     protected static string $view = 'filament.pages.files';
 
-    public function infolist(Infolist $infolist): Infolist
-    {
-
-    }
 }
