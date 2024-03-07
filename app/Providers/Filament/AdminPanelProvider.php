@@ -57,7 +57,7 @@ class AdminPanelProvider extends PanelProvider
             ->pages([
                 Pages\Dashboard::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
+            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets') // This code will discover all widgets and display it on dashboard
             ->widgets([
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
@@ -80,11 +80,6 @@ class AdminPanelProvider extends PanelProvider
                 'logout' => MenuItem::make()->label('Log out'),
             ])
             ->plugins([
-                // FilamentBackgroundsPlugin::make()
-                //     ->imageProvider(
-                //         MyImages::make()
-                //             ->directory('storage/media/backgrounds/')
-                //     ),
                 QuickCreatePlugin::make()
                     ->includes([
                         \App\Filament\Resources\UserResource::class,
