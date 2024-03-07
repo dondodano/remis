@@ -1,4 +1,11 @@
 <x-filament-panels::page>
-    {{-- <h1>{{ $freeSpace }}</h1> <p>of {{ $totalSpace }} used</p> --}}
-    {{ $this->infolist }}
+    <div>
+        @livewire(\App\Filament\Widgets\StorageStatOverview::class)
+    </div>
+
+    {{-- {{ $this->infolist }} --}}
+
+    <div>
+        @livewire(\App\Filament\Widgets\StorageChart::class)
+    </div>
 </x-filament-panels::page>

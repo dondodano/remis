@@ -13,4 +13,9 @@ class Files extends Page
     protected static ?string $navigationIcon = 'heroicon-o-folder';
 
     protected static string $view = 'filament.pages.files';
+
+    public function infolist(Infolist $infolist): Infolist
+    {
+
+    }
 }
