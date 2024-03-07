@@ -2,22 +2,21 @@
 
 namespace App\Filament\Pages;
 
+use App\Models\User;
 use Filament\Pages\Page;
-use Filament\Infolists\Infolist;
-use Filament\Infolists\Components\Section;
+use Filament\Tables\Table;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Contracts\HasTable;
+use Filament\Tables\Columns\ImageColumn;
 use App\Filament\Widgets\FilesStatOverview;
-use Filament\Infolists\Components\IconEntry;
-use Filament\Infolists\Components\TextEntry;
-use Filament\Infolists\Components\ImageEntry;
-use Filament\Infolists\Contracts\HasInfolists;
-use Filament\Infolists\Components\RepeatableEntry;
-use Filament\Infolists\Concerns\InteractsWithInfolists;
-use Filament\Infolists\Components\IconEntry\IconEntrySize;
-use Filament\Infolists\Components\TextEntry\TextEntrySize;
+use Filament\Tables\Concerns\InteractsWithTable;
 
-class Files extends Page implements HasInfolists
+class Files extends Page implements HasTable
 {
-    use InteractsWithInfolists;
+    //use InteractsWithInfolists;
+    use InteractsWithTable;
 
     protected static ?int $navigationSort = 2;
 
@@ -34,67 +33,61 @@ class Files extends Page implements HasInfolists
         ];
     }
 
-    // public function infolist(Infolist $infolist): Infolist
-    // {
-    //     $varInfoList =  $infolist
-    //         ->state([
-    //             'files' => [
-    //                 0 => [
-    //                     'name' => 'AngAlamatNgMahiwangBato.xls',
-    //                     'author' => 'Dondo T. Dano',
-    //                     'avatar' => "https://ui-avatars.com/api/?background=random&size=128&rounded=true&bold=true&format=svg&name=Dondo+Dano",
-    //                     'last_modified' => '2024-03-07 03:04 PM',
-    //                     'file_size' => '100 GB'
-    //                 ],
-    //                 1 => [
-    //                     'name' => 'AngAlamatNgMahiwangBato.xlss',
-    //                     'author' => 'Dondo T. DanoYeah',
-    //                     'avatar' => "https://ui-avatars.com/api/?background=random&size=128&rounded=true&bold=true&format=svg&name=Dondo+Yeah",
-    //                     'last_modified' => '2024-03-07 03:04 PM',
-    //                     'file_size' => '101 GB'
-    //                 ],
-    //         ]
-    //         ])
-    //         ->schema([
-    //             Section::make('Recent Files')
-    //                 ->description('This section display users\' most recently uploaded files.')
-    //                 ->schema([
+    public function table(Table $table): Table
+    {
+        return $table
+            ->query(User::query())
+            ->columns([
+                TextColumn::make('file_name')
+                    ->limit(15)
+                    ->label('File Name')
+                    //->searchable()
+                    ->sortable()
+                    ->tooltip(function (TextColumn $column): ?string {
+                        $state = $column->getState();
+                        if (strlen($state) <= $column->getCharacterLimit()) {
+                            return null;
+                        }
+                        return $state;
+                    }),
+                ImageColumn::make('avatar')
+                    ->size(30)
+                    ->toggleable(),
+                TextColumn::make('first_name')
+                    ->formatStateUsing(function($state, User $user){
+                        return $user->first_name .' '. $user->last_name;
+                    })
+                    ->label('Name')
+                    ->searchable()
+                    ->toggleable()
+                    ->sortable(),
+                TextColumn::make('updated_at')
+                    ->label('Date modified')
+                    ->toggleable()
+                    ->since()
+                    ->toggleable()
+            ])
+            ->filters([
 
-    //                     RepeatableEntry::make('files')
-    //                         ->label('')
-    //                         ->schema([
-    //                             TextEntry::make('name')
-    //                                 ->label('')
-    //                                 ->limit(10)
-    //                                 ->tooltip(function (TextEntry $component): ?string {
-    //                                     $state = $component->getState();
-    //                                     if (strlen($state) <= $component->getCharacterLimit()) {
-    //                                         return null;
-    //                                     }
-    //                                     return $state;
-    //                                 }),
-    //                             ImageEntry::make('avatar')
-    //                                 ->label('')
-    //                                 ->height(30)
-    //                                 ->circular(),
-    //                             TextEntry::make('author')
-    //                                 ->label('')
-    //                                 ->badge(),
-    //                             TextEntry::make('last_modified')
-    //                                 ->label('')
-    //                                 ->badge()
-    //                                 ->color('gray')
-    //                                 ->size(TextEntrySize::ExtraSmall),
-    //                             TextEntry::make('file_size')
-    //                                 ->label(''),
-    //                         ])
-    //                         ->contained(false)
-    //                         ->columns(5),
-    //                 ])
-    //                 ->collapsible(),
+            ])
+            ->actions([
+                Action::make('view')
+                    ->icon('heroicon-o-arrow-top-right-on-square')
+                    ->label("")
+                    ->color('gray')
+                    ->action(function(User $user): void{
+                        Notification::make()
+                            ->title("Action disprove verification of " . $user->name)
+                            ->success()
+                            ->duration(2000)
+                            ->send();
+                    })
+            ])
+            ->bulkActions([
 
-    //         ]);
-
-    //     return $varInfoList;
-    // }
+            ])
+            ->emptyStateIcon('heroicon-o-x-circle')
+            ->emptyStateHeading('No file uploaded yet')
+            ->emptyStateDescription('Once you file uploaded, it will appear here.');
+    }
 }

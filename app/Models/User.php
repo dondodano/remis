@@ -29,7 +29,8 @@ class User extends Authenticatable implements HasName
         'user_role',
         'google_id',
         'avatar',
-        'remember_token'
+        'remember_token',
+        'updated_at'
     ];
 
     /**
@@ -50,7 +51,9 @@ class User extends Authenticatable implements HasName
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
-        'user_role' => UserRole::class
+        'user_role' => UserRole::class,
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime'
     ];
 
     const DELETED_AT = 'deleted_at';
