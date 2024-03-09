@@ -4,9 +4,8 @@ namespace App\Filament\Pages;
 
 use Filament\Pages\Page;
 use Illuminate\Contracts\Support\Htmlable;
-use ShuvroRoy\FilamentSpatieLaravelBackup\Pages\Backups as BaseBackups;
 
-class Backups extends BaseBackups
+class Backups extends Page
 {
 
     protected static ?string $navigationIcon = 'heroicon-o-circle-stack';
@@ -15,7 +14,7 @@ class Backups extends BaseBackups
 
     public function getHeading(): string | Htmlable
     {
-        return 'Application Backups';
+        return 'Backups';
     }
 
     public static function getNavigationGroup(): ?string
