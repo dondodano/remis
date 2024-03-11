@@ -35,6 +35,7 @@
         "mchev/banhammer": "^1.2",
         "nunomaduro/termwind": "^1.15",
         "saade/filament-fullcalendar": "3.0",
+        "spatie/laravel-backup": "^8.6",
         "wnx/laravel-backup-restore": "^1.1"
     },
     "require-dev": {
