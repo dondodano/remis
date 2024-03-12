@@ -68,10 +68,9 @@ class Backups extends Page  implements HasTable
             ])
             ->actions([
                 Action::make('delete')
-                    ->label('')
+                    ->label('Delete')
                     ->color('gray')
                     ->icon('heroicon-o-trash')
-                    ->tooltip('Delete')
                     ->action(function(SpatieBackup $record){
 
                             Notification::make()
@@ -88,10 +87,9 @@ class Backups extends Page  implements HasTable
                     }),
 
                 Action::make('forceDelete')
-                    ->label('')
+                    ->label('Force Delete')
                     ->color('gray')
                     ->icon('heroicon-o-trash')
-                    ->tooltip('Force Delete')
                     ->action(function(SpatieBackup $record){
 
                         $fileStoragePath = 'public/REMIS/' . $record->file_name;
@@ -120,7 +118,6 @@ class Backups extends Page  implements HasTable
                         ->label('Delete')
                         ->color('gray')
                         ->icon('heroicon-o-trash')
-                        ->tooltip('Delete')
                         ->action(function(SpatieBackup $record){
 
                                 Notification::make()
@@ -140,7 +137,6 @@ class Backups extends Page  implements HasTable
                         ->label('Force Delete')
                         ->color('gray')
                         ->icon('heroicon-o-trash')
-                        ->tooltip('Force Delete')
                         ->action(function(SpatieBackup $record){
 
                             $fileStoragePath = 'public/REMIS/' . $record->file_name;
