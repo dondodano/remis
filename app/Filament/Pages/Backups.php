@@ -2,16 +2,17 @@
 
 namespace App\Filament\Pages;
 
-use Illuminate\Support\Number;
 use Carbon\Carbon;
 use Filament\Pages\Page;
 use Filament\Tables\Table;
-use Illuminate\Support\Facades\Storage;
 use App\Models\SpatieBackup;
+use Illuminate\Support\Number;
 use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\BulkAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Storage;
 use Filament\Notifications\Notification;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\CreateAction;
@@ -47,10 +48,6 @@ class Backups extends Page  implements HasTable
         return 3;
     }
 
-    public function getDefaultFileName(): ?string
-    {
-        return 'backup-'. Carbon::now()->format('Y-m-d-H-i-s.\z\i\p');
-    }
 
     public function table(Table $table): Table
     {
@@ -70,19 +67,99 @@ class Backups extends Page  implements HasTable
                 TrashedFilter::make(),
             ])
             ->actions([
-                DeleteAction::make()->label('')->color('gray')->icon('heroicon-o-trash')->tooltip('Delete')
-                    ->successNotification(
+                Action::make('delete')
+                    ->label('')
+                    ->color('gray')
+                    ->icon('heroicon-o-trash')
+                    ->tooltip('Delete')
+                    ->action(function(SpatieBackup $record){
+
+                            Notification::make()
+                                ->title("Backup created! " .  $record->file_name )
+                                ->success()
+                                ->duration(2000)
+                                ->send();
+
+                            //$record->delete();
+                    })
+                    ->requiresConfirmation()
+                    ->hidden(function(SpatieBackup $record){
+                        return !is_null($record->deleted_at);
+                    }),
+
+                Action::make('forceDelete')
+                    ->label('')
+                    ->color('gray')
+                    ->icon('heroicon-o-trash')
+                    ->tooltip('Force Delete')
+                    ->action(function(SpatieBackup $record){
+
+                        $fileStoragePath = 'public/REMIS/' . $record->file_name;
+
+                        Storage::delete( $fileStoragePath);
+
                         Notification::make()
+                            ->title("Backup deleted! " . $record->file_name)
                             ->success()
-                            ->title('User deleted')
-                            ->body("The user has been deleted successfully."),
-                    ),
+                            ->duration(2000)
+                            ->send();
+
+                        $record->forceDelete();
+
+                    })
+                    ->requiresConfirmation()
+                    ->hidden(function(SpatieBackup $record){
+                        return is_null($record->deleted_at);
+                    }),
+
             ])
             ->bulkActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                    RestoreBulkAction::make(),
-                ]),
+                    BulkAction::make('delete')
+                        ->requiresConfirmation()
+                        ->label('Delete')
+                        ->color('gray')
+                        ->icon('heroicon-o-trash')
+                        ->tooltip('Delete')
+                        ->action(function(SpatieBackup $record){
+
+                                Notification::make()
+                                    ->title("Backup created! " .  $record->file_name )
+                                    ->success()
+                                    ->duration(2000)
+                                    ->send();
+
+                                $record->delete();
+                        })
+                        ->hidden(function(SpatieBackup $record){
+                            return !is_null($record->deleted_at);
+                        }),
+
+                    BulkAction::make('forceDelete')
+                        ->requiresConfirmation()
+                        ->label('Force Delete')
+                        ->color('gray')
+                        ->icon('heroicon-o-trash')
+                        ->tooltip('Force Delete')
+                        ->action(function(SpatieBackup $record){
+
+                            $fileStoragePath = 'public/REMIS/' . $record->file_name;
+
+                            Storage::delete( $fileStoragePath);
+
+                            Notification::make()
+                                ->title("Backup deleted! " . $record->file_name)
+                                ->success()
+                                ->duration(2000)
+                                ->send();
+
+                            $record->forceDelete();
+
+                        })
+                        ->hidden(function(SpatieBackup $record){
+                            return is_null($record->deleted_at);
+                        }),
+                ])
             ])
             ->headerActions([
                 Action::make('createBackup')
@@ -90,21 +167,23 @@ class Backups extends Page  implements HasTable
                     ->icon('heroicon-m-plus')
                     ->action(function(): void
                     {
+                        $defaultFileName = 'backup-'. Carbon::now()->format('Y-m-d-H-i-s.\z\i\p');
+
                         $path =  "/storage/REMIS/";
-                        $fullPath =  public_path() . $path  . $this->getDefaultFileName();
+                        $fullPath =  public_path() . $path  . $defaultFileName;
                         Artisan::call('backup:run --only-db');
                         $size = Number::fileSize(filesize($fullPath));
 
                         SpatieBackup::firstOrCreate([
                             'file_location' =>  $path,
-                            'file_name' => $this->getDefaultFileName(),
+                            'file_name' => $defaultFileName,
                             'file_size' => $size
                         ]);
 
-                        
+
 
                         Notification::make()
-                            ->title("Backup created! backup-" .  $this->getDefaultFileName() )
+                            ->title("Backup created! backup-" .  $defaultFileName )
                             ->success()
                             ->duration(2000)
                             ->send();
