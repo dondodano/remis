@@ -39,6 +39,7 @@ return [
     'google_client_secret' => env('GOOGLE_CLIENT_SECRET'),
     'email_domain' => env('EMAIL_DOMAIN'),
     'backup_archive_password' => env('BACKUP_ARCHIVE_PASSWORD'),
+    'activity_logger_enabled' => env('ACTIVITY_LOGGER_ENABLED'),
 
     /*
     |--------------------------------------------------------------------------

@@ -279,7 +279,6 @@ class Backups extends Page  implements HasTable
             ->emptyStateHeading('No backup created yet')
             ->emptyStateDescription('Once backup is created, it will appear here.')
             ->deferLoading();
-            //->deselectAllRecordsWhenFiltered(false);
     }
 
 }
