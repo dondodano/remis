@@ -68,9 +68,10 @@ class Backups extends Page  implements HasTable
             ])
             ->actions([
                 Action::make('delete')
-                    ->label('Delete')
+                    ->label('')
                     ->color('gray')
                     ->icon('heroicon-o-trash')
+                    ->tooltip('Delete')
                     ->action(function(SpatieBackup $record){
 
                             Notification::make()
@@ -79,17 +80,21 @@ class Backups extends Page  implements HasTable
                                 ->duration(2000)
                                 ->send();
 
-                            //$record->delete();
+                            $record->delete();
                     })
                     ->requiresConfirmation()
+                    ->modalHeading('Delete backup')
+                    ->modalDescription('Are you sure you\'d like to delete this backup? This cannot be undone.')
+                    ->modalSubmitActionLabel('Yes, delete it')
                     ->hidden(function(SpatieBackup $record){
                         return !is_null($record->deleted_at);
                     }),
 
                 Action::make('forceDelete')
-                    ->label('Force Delete')
+                    ->label('')
                     ->color('gray')
                     ->icon('heroicon-o-trash')
+                    ->tooltip('Force Delete')
                     ->action(function(SpatieBackup $record){
 
                         $fileStoragePath = 'public/REMIS/' . $record->file_name;
@@ -106,34 +111,60 @@ class Backups extends Page  implements HasTable
 
                     })
                     ->requiresConfirmation()
+                    ->modalHeading('Delete backup')
+                    ->modalDescription('Are you sure you\'d like to force delete this backup? This cannot be undone.')
+                    ->modalSubmitActionLabel('Yes, delete it')
                     ->hidden(function(SpatieBackup $record){
                         return is_null($record->deleted_at);
                     }),
+                Action::make('restore')
+                    ->label('')
+                    ->color('gray')
+                    ->icon('heroicon-o-arrow-uturn-left')
+                    ->tooltip('Restore')
+                    ->action(function(SpatieBackup $record){
 
+                        Notification::make()
+                            ->title("Backup restored! " . $record->file_name)
+                            ->success()
+                            ->duration(2000)
+                            ->send();
+
+                        $record->restore();
+
+                    })
+                    ->requiresConfirmation()
+                    ->modalHeading('Restore backup')
+                    ->modalDescription('Are you sure you\'d like to restore this backup?')
+                    ->modalSubmitActionLabel('Yes, restore it')
+                    ->hidden(function(SpatieBackup $record){
+                        return is_null($record->deleted_at);
+                    }),
             ])
             ->bulkActions([
                 BulkActionGroup::make([
-                    BulkAction::make('delete')
-                        ->requiresConfirmation()
+                    BulkAction::make('bulkDelete')
                         ->label('Delete')
                         ->color('gray')
                         ->icon('heroicon-o-trash')
                         ->action(function(SpatieBackup $record){
-
                                 Notification::make()
-                                    ->title("Backup created! " .  $record->file_name )
+                                    ->title("Backup deleted! " .  $record->file_name )
                                     ->success()
                                     ->duration(2000)
                                     ->send();
 
                                 $record->delete();
                         })
+                        ->requiresConfirmation()
+                        ->modalHeading('Delete backup')
+                        ->modalDescription('Are you sure you\'d like to delete this backup? This cannot be undone.')
+                        ->modalSubmitActionLabel('Yes, delete it')
                         ->hidden(function(SpatieBackup $record){
                             return !is_null($record->deleted_at);
                         }),
 
-                    BulkAction::make('forceDelete')
-                        ->requiresConfirmation()
+                    BulkAction::make('bulkForceDelete')
                         ->label('Force Delete')
                         ->color('gray')
                         ->icon('heroicon-o-trash')
@@ -152,6 +183,32 @@ class Backups extends Page  implements HasTable
                             $record->forceDelete();
 
                         })
+                        ->requiresConfirmation()
+                        ->modalHeading('Delete backup')
+                        ->modalDescription('Are you sure you\'d like to force delete this backup? This cannot be undone.')
+                        ->modalSubmitActionLabel('Yes, delete it')
+                        ->hidden(function(SpatieBackup $record){
+                            return is_null($record->deleted_at);
+                        }),
+                    BulkAction::make('bulkRestore')
+                        ->label('Restore')
+                        ->color('gray')
+                        ->icon('heroicon-o-arrow-uturn-left')
+                        ->action(function(SpatieBackup $record){
+
+                            Notification::make()
+                                ->title("Backup restored! " . $record->file_name)
+                                ->success()
+                                ->duration(2000)
+                                ->send();
+
+                            $record->restore();
+
+                        })
+                        ->requiresConfirmation()
+                        ->modalHeading('Restore backup')
+                        ->modalDescription('Are you sure you\'d like to restore this backup?')
+                        ->modalSubmitActionLabel('Yes, restore it')
                         ->hidden(function(SpatieBackup $record){
                             return is_null($record->deleted_at);
                         }),
