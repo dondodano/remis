@@ -63,4 +63,12 @@ class Storage extends Page implements HasInfolists
                     ])
             ]);
     }
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            \App\Filament\Widgets\StorageStatOverview::class,
+            \App\Filament\Widgets\StorageChart::class
+        ];
+    }
 }
