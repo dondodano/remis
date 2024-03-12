@@ -11,6 +11,8 @@ use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\BulkAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
 use Filament\Notifications\Notification;
@@ -142,78 +144,76 @@ class Backups extends Page  implements HasTable
                     }),
             ])
             ->bulkActions([
-                BulkActionGroup::make([
-                    BulkAction::make('bulkDelete')
-                        ->label('Delete')
-                        ->color('gray')
-                        ->icon('heroicon-o-trash')
-                        ->action(function(Collection  $records){
-                                Notification::make()
-                                    ->title("Backup deleted! " .  $records->each->file_name )
-                                    ->success()
-                                    ->duration(2000)
-                                    ->send();
+                // BulkActionGroup::make([
+                //     BulkAction::make('bulkDelete')
+                //         ->label('Delete')
+                //         ->color('gray')
+                //         ->icon('heroicon-o-trash')
+                //         ->action(function(SpatieBackup  $record, Collection $selectedRecords){
 
-                                $records->each->delete();
-                        })
-                        ->requiresConfirmation()
-                        ->modalHeading('Delete backup')
-                        ->modalDescription('Are you sure you\'d like to delete this backup? This cannot be undone.')
-                        ->modalSubmitActionLabel('Yes, delete it')
-                        ->hidden(function(SpatieBackup $record){
-                            return !is_null($record->deleted_at);
-                        }),
+                //             Notification::make()
+                //                 ->title("Backup (".$selectedRecords->each->get()->count().") deleted!")
+                //                 ->success()
+                //                 ->duration(2000)
+                //                 ->send();
 
-                    BulkAction::make('bulkForceDelete')
-                        ->label('Force Delete')
-                        ->color('gray')
-                        ->icon('heroicon-o-trash')
-                        ->action(function(Collection  $records){
+                //                 $selectedRecords->each->delete();
 
-                            $fileStoragePath = 'public/REMIS/' . $records->each->file_name;
+                //         })
+                //         ->requiresConfirmation()
+                //         ->modalHeading('Delete backup')
+                //         ->modalDescription('Are you sure you\'d like to delete this backup? This cannot be undone.')
+                //         ->modalSubmitActionLabel('Yes, delete it')
+                //         ->deselectRecordsAfterCompletion(),
 
-                            Storage::delete( $fileStoragePath);
+                //     BulkAction::make('bulkForceDelete')
+                //         ->label('Force Delete')
+                //         ->color('gray')
+                //         ->icon('heroicon-o-trash')
+                //         ->action(function(SpatieBackup  $record, Collection $selectedRecords){
 
-                            Notification::make()
-                                ->title("Backup deleted! " . $records->each->file_name)
-                                ->success()
-                                ->duration(2000)
-                                ->send();
+                //             $fileStoragePath = 'public/REMIS/' . $selectedRecords->each->file_name;
 
-                            $records->each->forceDelete();
+                //             Storage::delete( $fileStoragePath);
 
-                        })
-                        ->requiresConfirmation()
-                        ->modalHeading('Delete backup')
-                        ->modalDescription('Are you sure you\'d like to force delete this backup? This cannot be undone.')
-                        ->modalSubmitActionLabel('Yes, delete it')
-                        ->hidden(function(SpatieBackup $record){
-                            return is_null($record->deleted_at);
-                        }),
-                    BulkAction::make('bulkRestore')
-                        ->label('Restore')
-                        ->color('gray')
-                        ->icon('heroicon-o-arrow-uturn-left')
-                        ->action(function(Collection  $records){
+                //             Notification::make()
+                //                 ->title("Backup (".$selectedRecords->each->get()->count().") forcely deleted!")
+                //                 ->success()
+                //                 ->duration(2000)
+                //                 ->send();
 
-                            Notification::make()
-                                ->title("Backup restored! " . $records->each->file_name)
-                                ->success()
-                                ->duration(2000)
-                                ->send();
+                //             $selectedRecords->each->forceDelete();
 
-                            $records->each->restore();
+                //         })
+                //         ->requiresConfirmation()
+                //         ->modalHeading('Delete backup')
+                //         ->modalDescription('Are you sure you\'d like to force delete this backup? This cannot be undone.')
+                //         ->modalSubmitActionLabel('Yes, delete it')
+                //         ->deselectRecordsAfterCompletion(),
 
-                        })
-                        ->requiresConfirmation()
-                        ->modalHeading('Restore backup')
-                        ->modalDescription('Are you sure you\'d like to restore this backup?')
-                        ->modalSubmitActionLabel('Yes, restore it')
-                        ->hidden(function(SpatieBackup $record){
-                            return is_null($record->deleted_at);
-                        }),
-                ])
+                //     BulkAction::make('bulkRestore')
+                //         ->label('Restore')
+                //         ->color('gray')
+                //         ->icon('heroicon-o-arrow-uturn-left')
+                //         ->action(function(SpatieBackup  $record, Collection $selectedRecords){
+
+                //             Notification::make()
+                //                 ->title("Backup (".$selectedRecords->each->get()->count().") restored!")
+                //                 ->success()
+                //                 ->duration(2000)
+                //                 ->send();
+
+                //             $selectedRecords->each->restore();
+
+                //         })
+                //         ->requiresConfirmation()
+                //         ->modalHeading('Restore backup')
+                //         ->modalDescription('Are you sure you\'d like to restore this backup?')
+                //         ->modalSubmitActionLabel('Yes, restore it')
+                //         ->deselectRecordsAfterCompletion(),
+                // ])
             ])
+            ->selectCurrentPageOnly()
             ->headerActions([
                 Action::make('createBackup')
                     ->label('Create backup')
@@ -244,7 +244,8 @@ class Backups extends Page  implements HasTable
             ])
             ->emptyStateIcon('heroicon-o-x-circle')
             ->emptyStateHeading('No backup created yet')
-            ->emptyStateDescription('Once backup is created, it will appear here.');
+            ->emptyStateDescription('Once backup is created, it will appear here.')
+            ->deferLoading();
     }
 
 }

@@ -15,4 +15,6 @@ class SpatieBackup extends Model
         'file_name',
         'file_size'
     ];
+
+    const DELETED_AT = 'deleted_at';
 }

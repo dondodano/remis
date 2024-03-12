@@ -203,12 +203,12 @@ class UserResource extends Resource
                 // Action Group : of Delete , Approve and Disapprove User
                 ActionGroup::make([
                     Tables\Actions\DeleteAction::make()->label('Delete')->color('gray')
-                    ->successNotification(
-                        Notification::make()
-                            ->success()
-                            ->title('User deleted')
-                            ->body("The user has been deleted successfully."),
-                    ),
+                        ->successNotification(
+                            Notification::make()
+                                ->success()
+                                ->title('User deleted')
+                                ->body("The user has been deleted successfully."),
+                        ),
 
 
                     Tables\Actions\Action::make('disprove-verification')
