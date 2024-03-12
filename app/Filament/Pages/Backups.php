@@ -147,14 +147,14 @@ class Backups extends Page  implements HasTable
                         ->label('Delete')
                         ->color('gray')
                         ->icon('heroicon-o-trash')
-                        ->action(function(SpatieBackup $record){
+                        ->action(function(Collection  $records){
                                 Notification::make()
-                                    ->title("Backup deleted! " .  $record->file_name )
+                                    ->title("Backup deleted! " .  $records->each->file_name )
                                     ->success()
                                     ->duration(2000)
                                     ->send();
 
-                                $record->delete();
+                                $records->each->delete();
                         })
                         ->requiresConfirmation()
                         ->modalHeading('Delete backup')
@@ -168,19 +168,19 @@ class Backups extends Page  implements HasTable
                         ->label('Force Delete')
                         ->color('gray')
                         ->icon('heroicon-o-trash')
-                        ->action(function(SpatieBackup $record){
+                        ->action(function(Collection  $records){
 
-                            $fileStoragePath = 'public/REMIS/' . $record->file_name;
+                            $fileStoragePath = 'public/REMIS/' . $records->each->file_name;
 
                             Storage::delete( $fileStoragePath);
 
                             Notification::make()
-                                ->title("Backup deleted! " . $record->file_name)
+                                ->title("Backup deleted! " . $records->each->file_name)
                                 ->success()
                                 ->duration(2000)
                                 ->send();
 
-                            $record->forceDelete();
+                            $records->each->forceDelete();
 
                         })
                         ->requiresConfirmation()
@@ -194,15 +194,15 @@ class Backups extends Page  implements HasTable
                         ->label('Restore')
                         ->color('gray')
                         ->icon('heroicon-o-arrow-uturn-left')
-                        ->action(function(SpatieBackup $record){
+                        ->action(function(Collection  $records){
 
                             Notification::make()
-                                ->title("Backup restored! " . $record->file_name)
+                                ->title("Backup restored! " . $records->each->file_name)
                                 ->success()
                                 ->duration(2000)
                                 ->send();
 
-                            $record->restore();
+                            $records->each->restore();
 
                         })
                         ->requiresConfirmation()
