@@ -2,8 +2,8 @@
 
 namespace App\Filament\Pages;
 
-use Widgets\AccountWidget;
-use Widgets\FilamentInfoWidget;
+use Filament\Widgets\AccountWidget;
+use Filament\Widgets\FilamentInfoWidget;
 use Filament\Pages\Dashboard as BaseDashboard;
 
 class Dashboard extends BaseDashboard
@@ -13,7 +13,7 @@ class Dashboard extends BaseDashboard
     protected static string $view = 'filament.pages.dashboard';
 
 
-    public function getWidgets(): array
+    public function getHeaderWidgets(): array
     {
         return [
             AccountWidget::class,
