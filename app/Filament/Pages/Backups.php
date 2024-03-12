@@ -144,74 +144,107 @@ class Backups extends Page  implements HasTable
                     }),
             ])
             ->bulkActions([
-                // BulkActionGroup::make([
-                //     BulkAction::make('bulkDelete')
-                //         ->label('Delete')
-                //         ->color('gray')
-                //         ->icon('heroicon-o-trash')
-                //         ->action(function(SpatieBackup  $record, Collection $selectedRecords){
+                BulkActionGroup::make([
+                    BulkAction::make('delete')
+                        ->label('Delete')
+                        ->color('gray')
+                        ->icon('heroicon-o-trash')
+                        ->action(function(SpatieBackup  $record, Collection $selectedRecords){
 
-                //             Notification::make()
-                //                 ->title("Backup (".$selectedRecords->each->get()->count().") deleted!")
-                //                 ->success()
-                //                 ->duration(2000)
-                //                 ->send();
+                            Notification::make()
+                                ->title("Backup (".$selectedRecords->each->get()->count().") deleted!")
+                                ->success()
+                                ->duration(2000)
+                                ->send();
 
-                //                 $selectedRecords->each->delete();
+                                $selectedRecords->each->delete();
 
-                //         })
-                //         ->requiresConfirmation()
-                //         ->modalHeading('Delete backup')
-                //         ->modalDescription('Are you sure you\'d like to delete this backup? This cannot be undone.')
-                //         ->modalSubmitActionLabel('Yes, delete it')
-                //         ->deselectRecordsAfterCompletion(),
+                        })
+                        ->requiresConfirmation()
+                        ->modalHeading('Delete backup')
+                        ->modalDescription('Are you sure you\'d like to delete this backup? This cannot be undone.')
+                        ->modalSubmitActionLabel('Yes, delete it')
+                        ->deselectRecordsAfterCompletion()
+                        ->hidden(function(HasTable $livewire){
+                            $trashedFilterState = $livewire->getTableFilterState(TrashedFilter::class) ?? [];
 
-                //     BulkAction::make('bulkForceDelete')
-                //         ->label('Force Delete')
-                //         ->color('gray')
-                //         ->icon('heroicon-o-trash')
-                //         ->action(function(SpatieBackup  $record, Collection $selectedRecords){
+                            if (! array_key_exists('value', $trashedFilterState)) {
+                                return false;
+                            }
 
-                //             $fileStoragePath = 'public/REMIS/' . $selectedRecords->each->file_name;
+                            if ($trashedFilterState['value']) {
+                                return false;
+                            }
 
-                //             Storage::delete( $fileStoragePath);
+                            return filled($trashedFilterState['value']);
+                        }),
 
-                //             Notification::make()
-                //                 ->title("Backup (".$selectedRecords->each->get()->count().") forcely deleted!")
-                //                 ->success()
-                //                 ->duration(2000)
-                //                 ->send();
+                    BulkAction::make('forceDelete')
+                        ->label('Force Delete')
+                        ->color('gray')
+                        ->icon('heroicon-o-trash')
+                        ->action(function(SpatieBackup  $record, Collection $selectedRecords){
 
-                //             $selectedRecords->each->forceDelete();
+                            $fileStoragePath = 'public/REMIS/' . $selectedRecords->each->file_name;
 
-                //         })
-                //         ->requiresConfirmation()
-                //         ->modalHeading('Delete backup')
-                //         ->modalDescription('Are you sure you\'d like to force delete this backup? This cannot be undone.')
-                //         ->modalSubmitActionLabel('Yes, delete it')
-                //         ->deselectRecordsAfterCompletion(),
+                            Storage::delete( $fileStoragePath);
 
-                //     BulkAction::make('bulkRestore')
-                //         ->label('Restore')
-                //         ->color('gray')
-                //         ->icon('heroicon-o-arrow-uturn-left')
-                //         ->action(function(SpatieBackup  $record, Collection $selectedRecords){
+                            Notification::make()
+                                ->title("Backup (".$selectedRecords->each->get()->count().") forcely deleted!")
+                                ->success()
+                                ->duration(2000)
+                                ->send();
 
-                //             Notification::make()
-                //                 ->title("Backup (".$selectedRecords->each->get()->count().") restored!")
-                //                 ->success()
-                //                 ->duration(2000)
-                //                 ->send();
+                            $selectedRecords->each->forceDelete();
 
-                //             $selectedRecords->each->restore();
+                        })
+                        ->requiresConfirmation()
+                        ->modalHeading('Delete backup')
+                        ->modalDescription('Are you sure you\'d like to force delete this backup? This cannot be undone.')
+                        ->modalSubmitActionLabel('Yes, delete it')
+                        ->deselectRecordsAfterCompletion()
+                        ->hidden(function(HasTable $livewire){
+                            $trashedFilterState = $livewire->getTableFilterState(TrashedFilter::class) ?? [];
 
-                //         })
-                //         ->requiresConfirmation()
-                //         ->modalHeading('Restore backup')
-                //         ->modalDescription('Are you sure you\'d like to restore this backup?')
-                //         ->modalSubmitActionLabel('Yes, restore it')
-                //         ->deselectRecordsAfterCompletion(),
-                // ])
+                            if (! array_key_exists('value', $trashedFilterState)) {
+                                return false;
+                            }
+
+                            return blank($trashedFilterState['value']);
+                        }),
+
+                    BulkAction::make('restore')
+                        ->label('Restore')
+                        ->color('gray')
+                        ->icon('heroicon-o-arrow-uturn-left')
+                        ->action(function(SpatieBackup  $record, Collection $selectedRecords){
+
+                            // Notification::make()
+                            //     ->title("Backup (".$selectedRecords->each->get()->count().") restored!")
+                            //     ->success()
+                            //     ->duration(2000)
+                            //     ->send();
+
+                            // $selectedRecords->each->restore();
+
+                            dd($record, $selectedRecords);
+
+                        })
+                        ->requiresConfirmation()
+                        ->modalHeading('Restore backup')
+                        ->modalDescription('Are you sure you\'d like to restore this backup?')
+                        ->modalSubmitActionLabel('Yes, restore it')
+                        ->deselectRecordsAfterCompletion()
+                        ->hidden(function(HasTable $livewire){
+                            $trashedFilterState = $livewire->getTableFilterState(TrashedFilter::class) ?? [];
+
+                            if (! array_key_exists('value', $trashedFilterState)) {
+                                return false;
+                            }
+
+                            return blank($trashedFilterState['value']);
+                        }),
+                ])
             ])
             ->selectCurrentPageOnly()
             ->headerActions([
@@ -245,7 +278,8 @@ class Backups extends Page  implements HasTable
             ->emptyStateIcon('heroicon-o-x-circle')
             ->emptyStateHeading('No backup created yet')
             ->emptyStateDescription('Once backup is created, it will appear here.')
-            ->deferLoading();
+            ->deferLoading()
+            ->deselectAllRecordsWhenFiltered(false);
     }
 
 }
