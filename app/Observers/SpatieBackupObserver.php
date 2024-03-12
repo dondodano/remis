@@ -13,7 +13,7 @@ class SpatieBackupObserver
     {
         activity()
             ->performedOn($spatieBackup)
-            ->log("created a backup")
+            ->log("created a backup with ID=[".$spatieBackup->id."]")
             ->causedBy(auth()->user());
     }
 
@@ -34,7 +34,7 @@ class SpatieBackupObserver
         {
             activity()
             ->performedOn($spatieBackup)
-            ->log("soft deleted a backup")
+            ->log("soft deleted a backup with ID=[".$spatieBackup->id."]")
             ->causedBy(auth()->user());
         }
     }
@@ -46,7 +46,7 @@ class SpatieBackupObserver
     {
         activity()
             ->performedOn($spatieBackup)
-            ->log("restored a backup")
+            ->log("restored a backup with ID=[".$spatieBackup->id."]")
             ->causedBy(auth()->user());
     }
 
@@ -57,7 +57,7 @@ class SpatieBackupObserver
     {
         activity()
             ->performedOn($spatieBackup)
-            ->log("force deleted a backup")
+            ->log("force deleted a backup with ID=[".$spatieBackup->id."]")
             ->causedBy(auth()->user());
     }
 }

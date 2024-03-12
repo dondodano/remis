@@ -115,7 +115,8 @@ class Activities extends Page  implements HasTable
             ->emptyStateIcon('heroicon-o-x-circle')
             ->emptyStateHeading('No activity log recorded yet')
             ->emptyStateDescription('Once activity los is created, it will appear here.')
-            ->deferLoading();
+            ->deferLoading()
+            ->defaultSort('created_at', 'desc');
 
     }
 }
