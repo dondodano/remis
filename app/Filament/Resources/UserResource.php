@@ -124,12 +124,10 @@ class UserResource extends Resource
                     })
                     ->label('Name')
                     ->searchable()
-                    ->toggleable()
-                    ->sortable(),
+                    ->toggleable(),
                 TextColumn::make('email')
                     ->searchable()
-                    ->toggleable()
-                    ->sortable(),
+                    ->toggleable(),
                 TextColumn::make('user_role')
                     ->label('Role')
                     ->badge()
