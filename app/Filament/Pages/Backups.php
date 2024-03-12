@@ -185,9 +185,12 @@ class Backups extends Page  implements HasTable
                         ->icon('heroicon-o-trash')
                         ->action(function(SpatieBackup  $record, Collection $selectedRecords){
 
-                            $fileStoragePath = 'public/REMIS/' . $selectedRecords->each->file_name;
+                            foreach($selectedRecords->each->get()->toArray() as $item)
+                            {
+                                $fileStoragePath = 'public/REMIS/' . $item['file_name'];
 
-                            Storage::delete( $fileStoragePath);
+                                Storage::delete( $fileStoragePath);
+                            }
 
                             Notification::make()
                                 ->title("Backup (".$selectedRecords->each->get()->count().") forcely deleted!")
@@ -196,7 +199,6 @@ class Backups extends Page  implements HasTable
                                 ->send();
 
                             $selectedRecords->each->forceDelete();
-
                         })
                         ->requiresConfirmation()
                         ->modalHeading('Delete backup')
@@ -267,7 +269,7 @@ class Backups extends Page  implements HasTable
 
 
                         Notification::make()
-                            ->title("Backup created! backup-" .  $defaultFileName )
+                            ->title("Backup created! " .  $defaultFileName )
                             ->success()
                             ->duration(2000)
                             ->send();
