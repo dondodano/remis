@@ -77,7 +77,7 @@ class Backups extends Page  implements HasTable
                     ->action(function(SpatieBackup $record){
 
                             Notification::make()
-                                ->title("Backup created! " .  $record->file_name )
+                                ->title("Backup (".$record->file_name.") deleted!")
                                 ->success()
                                 ->duration(2000)
                                 ->send();
@@ -104,7 +104,7 @@ class Backups extends Page  implements HasTable
                         Storage::delete( $fileStoragePath);
 
                         Notification::make()
-                            ->title("Backup deleted! " . $record->file_name)
+                            ->title("Backup (".$record->file_name.") forcely deleted!")
                             ->success()
                             ->duration(2000)
                             ->send();
@@ -127,7 +127,7 @@ class Backups extends Page  implements HasTable
                     ->action(function(SpatieBackup $record){
 
                         Notification::make()
-                            ->title("Backup restored! " . $record->file_name)
+                            ->title("Backup (".$record->file_name.") restored!")
                             ->success()
                             ->duration(2000)
                             ->send();
@@ -219,15 +219,13 @@ class Backups extends Page  implements HasTable
                         ->icon('heroicon-o-arrow-uturn-left')
                         ->action(function(SpatieBackup  $record, Collection $selectedRecords){
 
-                            // Notification::make()
-                            //     ->title("Backup (".$selectedRecords->each->get()->count().") restored!")
-                            //     ->success()
-                            //     ->duration(2000)
-                            //     ->send();
+                            Notification::make()
+                                ->title("Backup (".$selectedRecords->each->get()->count().") restored!")
+                                ->success()
+                                ->duration(2000)
+                                ->send();
 
-                            // $selectedRecords->each->restore();
-
-                            dd($record, $selectedRecords);
+                            $selectedRecords->each->restore();
 
                         })
                         ->requiresConfirmation()
@@ -278,8 +276,8 @@ class Backups extends Page  implements HasTable
             ->emptyStateIcon('heroicon-o-x-circle')
             ->emptyStateHeading('No backup created yet')
             ->emptyStateDescription('Once backup is created, it will appear here.')
-            ->deferLoading()
-            ->deselectAllRecordsWhenFiltered(false);
+            ->deferLoading();
+            //->deselectAllRecordsWhenFiltered(false);
     }
 
 }
