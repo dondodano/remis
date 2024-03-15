@@ -41,24 +41,24 @@ class StorageStatOverview extends BaseWidget
 
         $statFreeSpaceInPercentage = Stat::make('Free Space in Percentage', Number::percentage($this->freeSpaceInPercentage, precision: 2));
 
-        $statFreeSpace->description($this->differenceInSpace .' increate')
+        $statFreeSpace->description($this->differenceInSpace .' decrease')
             ->descriptionIcon('heroicon-m-arrow-trending-down')
             ->chart([7, 2, 10, 3, 15, 4, 17])
             ->color('danger');
 
-        $statFreeSpaceInPercentage->description(' increase')
+        $statFreeSpaceInPercentage->description(' decrease')
             ->descriptionIcon('heroicon-m-arrow-trending-down')
             ->chart([7, 2, 10, 3, 15, 4, 17])
             ->color('danger');
 
         if($this->freeSpaceInPercentage > 74)
         {
-            $statFreeSpace->description($this->differenceInSpace .' decrease')
+            $statFreeSpace->description($this->differenceInSpace .' increase')
                 ->descriptionIcon('heroicon-m-arrow-trending-up')
                 ->chart([7, 2, 10, 3, 15, 4, 17])
                 ->color('success');
 
-            $statFreeSpaceInPercentage->description(' decrease')
+            $statFreeSpaceInPercentage->description(' increase')
                 ->descriptionIcon('heroicon-m-arrow-trending-up')
                 ->chart([7, 2, 10, 3, 15, 4, 17])
                 ->color('success');
