@@ -27,9 +27,9 @@ class AuthPanelProvider extends PanelProvider
             ->default()
             ->id('auth')
             ->path('auth')
-            ->login()
-            ->passwordReset()
-            ->emailVerification()
+            //->login()
+            //->passwordReset()
+           // ->emailVerification()
             ->profile()
             ->colors([
                 'primary' => Color::rgb('rgb(16, 185, 129)'),
