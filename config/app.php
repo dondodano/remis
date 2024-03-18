@@ -186,6 +186,7 @@ return [
         App\Providers\Filament\PlanningPanelProvider::class,
         App\Providers\Filament\ProponentPanelProvider::class,
         App\Providers\Filament\EvaluatorPanelProvider::class,
+        App\Providers\Filament\AuthPanelProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\LadderServiceProvider::class,
 

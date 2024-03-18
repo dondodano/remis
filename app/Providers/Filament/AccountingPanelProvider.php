@@ -26,9 +26,6 @@ class AccountingPanelProvider extends PanelProvider
         return $panel
             ->id('accounting')
             ->path('accounting')
-            ->login()
-            ->passwordReset()
-            ->emailVerification()
             ->profile()
             ->colors([
                 'primary' => Color::rgb('rgb(16, 185, 129)'),

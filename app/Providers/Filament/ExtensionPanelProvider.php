@@ -26,9 +26,9 @@ class ExtensionPanelProvider extends PanelProvider
         return $panel
             ->id('extension')
             ->path('extension')
-            ->login()
-            ->passwordReset()
-            ->emailVerification()
+            // ->login()
+            // ->passwordReset()
+            // ->emailVerification()
             ->profile()
             ->colors([
                 'primary' => Color::rgb('rgb(16, 185, 129)'),

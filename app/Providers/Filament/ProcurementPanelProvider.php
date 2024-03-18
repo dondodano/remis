@@ -26,9 +26,9 @@ class ProcurementPanelProvider extends PanelProvider
         return $panel
             ->id('procurement')
             ->path('procurement')
-            ->login()
-            ->passwordReset()
-            ->emailVerification()
+            // ->login()
+            // ->passwordReset()
+            // ->emailVerification()
             ->profile()
             ->colors([
                 'primary' => Color::rgb('rgb(16, 185, 129)'),

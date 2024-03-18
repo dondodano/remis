@@ -27,8 +27,8 @@ class BudgetPanelProvider extends PanelProvider
             ->id('budget')
             ->path('budget')
             ->login()
-            ->passwordReset()
-            ->emailVerification()
+            // ->passwordReset()
+            // ->emailVerification()
             ->profile()
             ->colors([
                 'primary' => Color::rgb('rgb(16, 185, 129)'),

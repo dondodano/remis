@@ -26,9 +26,9 @@ class ResearchPanelProvider extends PanelProvider
         return $panel
             ->id('research')
             ->path('research')
-            ->login()
-            ->passwordReset()
-            ->emailVerification()
+            // ->login()
+            // ->passwordReset()
+            // ->emailVerification()
             ->profile()
             ->colors([
                 'primary' => Color::rgb('rgb(16, 185, 129)'),

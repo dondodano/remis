@@ -26,9 +26,9 @@ class PlanningPanelProvider extends PanelProvider
         return $panel
             ->id('planning')
             ->path('planning')
-            ->login()
-            ->passwordReset()
-            ->emailVerification()
+            // ->login()
+            // ->passwordReset()
+            // ->emailVerification()
             ->profile()
             ->colors([
                 'primary' => Color::rgb('rgb(16, 185, 129)'),
