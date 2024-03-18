@@ -184,6 +184,8 @@ return [
         App\Providers\Filament\ProcurementPanelProvider::class,
         App\Providers\Filament\AccountingPanelProvider::class,
         App\Providers\Filament\PlanningPanelProvider::class,
+        App\Providers\Filament\ProponentPanelProvider::class,
+        App\Providers\Filament\EvaluatorPanelProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\LadderServiceProvider::class,
 
