@@ -178,6 +178,12 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\Filament\AdminPanelProvider::class,
+        App\Providers\Filament\ResearchPanelProvider::class,
+        App\Providers\Filament\ExtensionPanelProvider::class,
+        App\Providers\Filament\BudgetPanelProvider::class,
+        App\Providers\Filament\ProcurementPanelProvider::class,
+        App\Providers\Filament\AccountingPanelProvider::class,
+        App\Providers\Filament\PlanningPanelProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\LadderServiceProvider::class,
 
