@@ -3,15 +3,17 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Filament\Panel;
 use App\Enums\UserRole;
 use Laravel\Sanctum\HasApiTokens;
 use Filament\Models\Contracts\HasName;
 use Illuminate\Notifications\Notifiable;
+use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable implements HasName
+class User extends Authenticatable implements HasName, FilamentUser
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
@@ -65,24 +67,8 @@ class User extends Authenticatable implements HasName
         return $this->getAttributeValue('first_name').' '.$this->getAttributeValue('last_name');
     }
 
-
-    /**
-     * Override boot
-     */
-    public static function boot()
+    public function canAccessPanel(Panel $panel): bool
     {
-        parent::boot();
-
-        static::created(function($user){
-
-        });
-
-        static::updated(function($user){
-
-        });
-
-        static::deleted(function($user){
-
-        });
+        return str_ends_with($this->email, '@yourdomain.com') && $this->hasVerifiedEmail();
     }
 }
