@@ -40,12 +40,12 @@ class BudgetPanelProvider extends PanelProvider
             ->discoverResources(in: app_path('Filament/Budget/Resources'), for: 'App\\Filament\\Budget\\Resources')
             ->discoverPages(in: app_path('Filament/Budget/Pages'), for: 'App\\Filament\\Budget\\Pages')
             ->pages([
-                //Pages\Dashboard::class,
+                Pages\Dashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Budget/Widgets'), for: 'App\\Filament\\Budget\\Widgets')
             ->widgets([
-                // Widgets\AccountWidget::class,
-                // Widgets\FilamentInfoWidget::class,
+                Widgets\AccountWidget::class,
+                Widgets\FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,

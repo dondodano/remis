@@ -40,12 +40,12 @@ class ResearchPanelProvider extends PanelProvider
             ->discoverResources(in: app_path('Filament/Research/Resources'), for: 'App\\Filament\\Research\\Resources')
             ->discoverPages(in: app_path('Filament/Research/Pages'), for: 'App\\Filament\\Research\\Pages')
             ->pages([
-                //Pages\Dashboard::class,
+                Pages\Dashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Research/Widgets'), for: 'App\\Filament\\Research\\Widgets')
             ->widgets([
-                // Widgets\AccountWidget::class,
-                // Widgets\FilamentInfoWidget::class,
+                Widgets\AccountWidget::class,
+                Widgets\FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
