@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             'last_name' => 'Dano',
             'email' => 'test@spamast.edu.ph',
             'password' => bcrypt('password'),
-            'user_role' => 'super',
+            'user_role_id' => '1',
             'avatar' => 'https://ui-avatars.com/api/?background=random&size=128&rounded=true&bold=true&format=svg&name=Dondo+Dano'
         ]);
     }

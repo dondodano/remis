@@ -41,7 +41,8 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->passwordReset()
             ->emailVerification()
-            ->profile(EditProfile::class)
+            ->profile()
+            //->profile(EditProfile::class)
             ->colors([
                 'primary' => Color::rgb('rgb(16, 185, 129)'),
             ])

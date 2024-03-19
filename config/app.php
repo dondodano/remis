@@ -187,7 +187,6 @@ return [
         App\Providers\Filament\ProponentPanelProvider::class,
         App\Providers\Filament\EvaluatorPanelProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\LadderServiceProvider::class,
 
         Laravel\Socialite\SocialiteServiceProvider::class,
     ])->toArray(),
