@@ -31,3 +31,11 @@ Route::prefix('admin')->group(function(){
      */
     Route::get('/projects/{record}/evaluate', EvaluateProject::class)->name('project.evaluate');
 });
+
+
+/**
+ * Test
+ */
+Route::get('/test', function(){
+    return bcrypt('password');
+});

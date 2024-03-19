@@ -35,12 +35,12 @@ class AdminPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
-            //->default()
+            ->default()
             ->id('admin')
             ->path('admin')
-            // ->login()
-            // ->passwordReset()
-            // ->emailVerification()
+            ->login()
+            ->passwordReset()
+            ->emailVerification()
             ->profile(EditProfile::class)
             ->colors([
                 'primary' => Color::rgb('rgb(16, 185, 129)'),
