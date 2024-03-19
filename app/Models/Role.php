@@ -15,8 +15,4 @@ class Role extends Model
         'role_definition',
     ];
 
-    public function associated()
-    {
-        return $this->belongsTo(UserRole::class, 'id', 'role_id');
-    }
 }

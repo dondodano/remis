@@ -26,22 +26,22 @@ class ListUsers extends ListRecords
     public function getTabs(): array
     {
         return [
-            'All' => Tab::make()
-                ->modifyQueryUsing(fn (Builder $query) => $query->whereNot('user_role' , 'admin')->whereNot('user_role' , 'super')),
-            'REMIS' => Tab::make()
-                ->modifyQueryUsing(fn (Builder $query) => $query->where('user_role' , 'remis')),
-            'Proponent' => Tab::make()
-                ->modifyQueryUsing(fn (Builder $query) => $query->where('user_role' , 'proponent')),
-            'RIDE Director' => Tab::make()
-                ->modifyQueryUsing(fn (Builder $query) => $query->where('user_role' , 'ridedirector')),
-            'RIDE Staff' => Tab::make()
-                ->modifyQueryUsing(fn (Builder $query) => $query->where('user_role' , 'ridestaff')),
-            'Budget Officer' => Tab::make()
-                ->modifyQueryUsing(fn (Builder $query) => $query->where('user_role' , 'budgetofficer')),
-            'Planning Officer' => Tab::make()
-                ->modifyQueryUsing(fn (Builder $query) => $query->where('user_role' , 'planningofficer')),
-            'Accounting Officer' => Tab::make()
-                ->modifyQueryUsing(fn (Builder $query) => $query->where('user_role' , 'accountingofficer')),
+            // 'All' => Tab::make()
+            //     ->modifyQueryUsing(fn (Builder $query) => $query->whereNot('user_role' , 'admin')->whereNot('user_role' , 'super')),
+            // 'REMIS' => Tab::make()
+            //     ->modifyQueryUsing(fn (Builder $query) => $query->where('user_role' , 'remis')),
+            // 'Proponent' => Tab::make()
+            //     ->modifyQueryUsing(fn (Builder $query) => $query->where('user_role' , 'proponent')),
+            // 'RIDE Director' => Tab::make()
+            //     ->modifyQueryUsing(fn (Builder $query) => $query->where('user_role' , 'ridedirector')),
+            // 'RIDE Staff' => Tab::make()
+            //     ->modifyQueryUsing(fn (Builder $query) => $query->where('user_role' , 'ridestaff')),
+            // 'Budget Officer' => Tab::make()
+            //     ->modifyQueryUsing(fn (Builder $query) => $query->where('user_role' , 'budgetofficer')),
+            // 'Planning Officer' => Tab::make()
+            //     ->modifyQueryUsing(fn (Builder $query) => $query->where('user_role' , 'planningofficer')),
+            // 'Accounting Officer' => Tab::make()
+            //     ->modifyQueryUsing(fn (Builder $query) => $query->where('user_role' , 'accountingofficer')),
         ];
     }
 

@@ -37,7 +37,6 @@ class UserFactory extends Factory
             'email' => preg_replace('/@example\..*/', '@'. config('app.email_domain'), fake()->unique()->safeEmail),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
-            'user_role_id' => rand(1,8),
             'avatar' => 'https://ui-avatars.com/api/?background=random&size=128&rounded=true&bold=true&format=svg&name='.$nameWithPlus,
             'remember_token' => Str::random(10),
 

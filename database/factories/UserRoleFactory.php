@@ -17,7 +17,8 @@ class UserRoleFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id'  => rand(1,10),
+            'role_id' => rand(2,8)
         ];
     }
 }

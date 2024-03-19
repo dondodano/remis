@@ -12,6 +12,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        /**
+         * Random Fake Users
+         */
         \App\Models\User::factory(10)->create();
 
         \App\Models\User::factory()->create([
@@ -19,14 +22,20 @@ class DatabaseSeeder extends Seeder
             'last_name' => 'Dano',
             'email' => 'test@spamast.edu.ph',
             'password' => bcrypt('password'),
-            'user_role_id' => '1',
             'avatar' => 'https://ui-avatars.com/api/?background=random&size=128&rounded=true&bold=true&format=svg&name=Dondo+Dano'
         ]);
 
+        /**
+         * Super Admin User
+         */
         \App\Models\Role::factory()->create([
             'role_nice' => 'admin',
             'role_definition' => 'Admin'
         ]);
+
+        /**
+         * Auto Add Roles
+         */
         \App\Models\Role::factory()->create([
             'role_nice' => 'remis',
             'role_definition' => 'REMIS'
@@ -56,10 +65,18 @@ class DatabaseSeeder extends Seeder
             'role_definition' => 'Accounting Officer'
         ]);
 
-
+        /**
+         * Auto Assign UserRole to User
+         */
         \App\Models\UserRole::factory()->create([
             'user_id' => 11,
             'role_id' => 1
         ]);
+
+
+        /**
+         * Fake UserRole of User
+         */
+        \App\Models\UserRole::factory(10)->create();
     }
 }

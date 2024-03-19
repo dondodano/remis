@@ -29,6 +29,7 @@ use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Filters\TrashedFilter;
 use App\Filament\Resources\UserResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Columns\Layout\Split;
 
 
 class UserResource extends Resource
@@ -99,14 +100,14 @@ class UserResource extends Resource
                             ->required()
                             ->password()
                             ->maxLength(255),
-                        Select::make('user_role')
-                            ->label('Role')
-                            ->helperText("Select your role from the options to provide access to the features most relevant to the user.")
-                            ->options(function($state){
-                                return UserRole::specificValues([
-                                    'super',
-                                ]);
-                            })
+                        // Select::make('user_role')
+                        //     ->label('Role')
+                        //     ->helperText("Select your role from the options to provide access to the features most relevant to the user.")
+                        //     ->options(function($state){
+                        //         return UserRole::specificValues([
+                        //             'super',
+                        //         ]);
+                        //     })
                         ]),
 
 
@@ -117,31 +118,33 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                ImageColumn::make('avatar'),
-                TextColumn::make('first_name')
-                    ->formatStateUsing(function($state, User $user){
-                        return $user->first_name .' '. $user->last_name;
-                    })
-                    ->label('Name')
-                    ->searchable()
-                    ->toggleable(),
-                TextColumn::make('email')
-                    ->searchable()
-                    ->toggleable(),
-                TextColumn::make('user_role')
-                    ->label('Role')
-                    ->badge()
-                    ->color(Color::Blue)
-                    ->toggleable()
-                    ->searchable(),
-                IconColumn::make('email_verified_at')
-                    ->label('Verified?')
-                    ->toggleable()
-                    ->getStateUsing(fn ($record): bool => $record->email_verified_at !== null)
-                    ->boolean()
-                    ->trueIcon('heroicon-o-shield-check')
-                    ->falseIcon('heroicon-o-shield-exclamation')
-                    ->size(IconColumn\IconColumnSize::Medium)
+                //Split::make([
+                    ImageColumn::make('avatar'),
+                    TextColumn::make('first_name')
+                        ->formatStateUsing(function($state, User $user){
+                            return $user->first_name .' '. $user->last_name;
+                        })
+                        ->label('Name')
+                        ->searchable()
+                        ->toggleable(),
+                //]),
+                    TextColumn::make('email')
+                        ->searchable()
+                        ->toggleable(),
+                    TextColumn::make('assignments.role_definition')
+                        ->label('Role')
+                        ->badge()
+                        ->color(Color::Blue)
+                        ->toggleable()
+                        ->searchable(),
+                    IconColumn::make('email_verified_at')
+                        ->label('Verified?')
+                        ->toggleable()
+                        ->getStateUsing(fn ($record): bool => $record->email_verified_at !== null)
+                        ->boolean()
+                        ->trueIcon('heroicon-o-shield-check')
+                        ->falseIcon('heroicon-o-shield-exclamation')
+                        ->size(IconColumn\IconColumnSize::Medium)
             ])
             ->filters([
                 TrashedFilter::make(),
