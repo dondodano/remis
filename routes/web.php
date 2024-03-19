@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\UserRole;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GAuth\GoogleAuthController;
 use App\Filament\Resources\ProjectResource\Pages\EvaluateProject;
@@ -37,5 +38,9 @@ Route::prefix('admin')->group(function(){
  * Test
  */
 Route::get('/test', function(){
-    return bcrypt('password');
+    $enumToArray = UserRole::cases();
+    // $userRoles = array_column($enumToArray, 'value');
+    // $jsonDecode =  json_decode(json_encode(UserRole::array()), true);
+    // return $jsonDecode[$userRoles[rand(1,8)]];
+    return UserRole::array();
 });

@@ -3,33 +3,35 @@ namespace App\Enums;
 
 use Filament\Notifications\Notification;
 use Filament\Support\Contracts\HasLabel;
+use Filament\Support\Contracts\HasDescription;
 
-enum UserRole: string implements HasLabel{
-    case Super = 'super';
+enum UserRole: string implements HasLabel, HasDescription{
     case Admin = 'admin';
-    case REMIS = 'remis';
+    case Remis = 'remis';
     case Proponent = 'proponent';
     case PlanningOfficer = 'planningofficer';
     case BudgetOfficer = 'budgetofficer';
-    case RIDEDirector = 'ridedirector';
+    case ResearchDirector = 'researchdirector';
+    case ExtensionDirector = 'extensiondirector';
     case AccountingOfficer = 'accountingofficer';
-    case RIDEStaff = 'ridestaff';
-    case Guest = 'guest';
 
     public function getLabel(): ?string
     {
+        return $this->name;
+    }
+
+    public function getDescription(): ?string
+    {
         return match ($this)
         {
-            self::Super => 'Super',
             self::Admin => 'Admin',
-            self::REMIS => 'REMIS',
+            self::Remis => 'REMIS',
             self::Proponent => 'Proponent',
             self::PlanningOfficer => 'Planning Officer',
             self::BudgetOfficer => 'Budget Officer',
-            self::RIDEDirector => 'RIDE Director',
+            self::ResearchDirector => 'Research Director',
+            self::ExtensionDirector => 'Extension Director',
             self::AccountingOfficer => 'Accounting Officer',
-            self::RIDEStaff => 'RIDE Staff',
-            self::Guest => 'Guest'
         };
     }
 

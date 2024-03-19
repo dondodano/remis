@@ -4,7 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Filament\Panel;
-use App\Enums\UserRole;
+use App\Models\UserRole;
 use Laravel\Sanctum\HasApiTokens;
 use Filament\Models\Contracts\HasName;
 use Illuminate\Notifications\Notifiable;
@@ -53,7 +53,6 @@ class User extends Authenticatable implements HasName, FilamentUser
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
-        'user_role' => UserRole::class,
         'created_at' => 'datetime',
         'updated_at' => 'datetime'
     ];
@@ -74,5 +73,10 @@ class User extends Authenticatable implements HasName, FilamentUser
         // }
 
         return true;
+    }
+
+    public function assignments()
+    {
+        return $this->hasMany(UserRole::class, 'user_id');
     }
 }
