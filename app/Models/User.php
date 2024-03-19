@@ -81,5 +81,4 @@ class User extends Authenticatable implements HasName, FilamentUser
         return $this->belongsToMany(Role::class,  UserRole::class,'user_id', 'role_id');
     }
 
-
 }

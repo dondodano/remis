@@ -26,8 +26,10 @@ class ListUsers extends ListRecords
     public function getTabs(): array
     {
         return [
-            // 'All' => Tab::make()
-            //     ->modifyQueryUsing(fn (Builder $query) => $query->whereNot('user_role' , 'admin')->whereNot('user_role' , 'super')),
+            'All' => Tab::make()
+                ->modifyQueryUsing(function(Builder $query){
+                    return $query->with('assignments');
+                }),
             // 'REMIS' => Tab::make()
             //     ->modifyQueryUsing(fn (Builder $query) => $query->where('user_role' , 'remis')),
             // 'Proponent' => Tab::make()
