@@ -24,14 +24,22 @@ class StatsUserOverview extends BaseWidget
     {
         $user = User::query();
 
+        // $proponent = $user->select('assignment_count')->with(['roles' => function($withRoles){
+        //     $withRoles->with(['assignment' => function($withAssignment){
+        //         $withAssignment->where('role_nice', 'proponent');
+        //     }])->withCount('assignment');
+        // }]);
+
+        //dd($proponent->get()->toArray());
+
         return [
-            // Stat::make('Record Total',  $this->getPageTableQuery()->count())
-            //     ->chart([7, 2, 10, 3, 15, 4, 17])
-            //     ->color('success'),
+            Stat::make('Record Total',  $this->getPageTableQuery()->count())
+                ->chart([7, 2, 10, 3, 15, 4, 17])
+                ->color('success'),
             // Stat::make('Users', $user->whereNot('user_role', 'admin')->whereNot('user_role', 'super')->count())
             //     ->chart([17, 2, 10, 3, 15, 4, 17])
             //     ->color('success'),
-            // Stat::make('Proponents',  $user->where('user_role', 'proponent')->count())
+            // Stat::make('Proponents',  $proponent)
             //     ->chart([17, 2, 10, 3, 15, 4, 7])
             //     ->color('success'),
         ];

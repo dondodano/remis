@@ -39,6 +39,7 @@
         "wnx/laravel-backup-restore": "^1.1"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.12",
         "barryvdh/laravel-ide-helper": "^2.13",
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.0",

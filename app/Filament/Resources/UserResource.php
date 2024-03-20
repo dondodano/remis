@@ -131,7 +131,7 @@ class UserResource extends Resource
                     TextColumn::make('email')
                         ->searchable()
                         ->toggleable(),
-                    TextColumn::make('assignments.role_definition')
+                    TextColumn::make('roles.assignment.role_definition')
                         ->label('Role')
                         ->badge()
                         ->color(Color::Blue)
@@ -264,7 +264,8 @@ class UserResource extends Resource
                     ->label('Add new user')
                     ->icon('heroicon-m-plus'),
             ])
-            ->emptyStateDescription('Once you add new user, it will appear here.');
+            ->emptyStateDescription('Once you add new user, it will appear here.')
+            ->striped();
     }
 
     public static function getRelations(): array

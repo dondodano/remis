@@ -4,16 +4,18 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Filament\Panel;
-use App\Models\UserRole;
 use App\Models\Role;
+use App\Models\UserRole;
 use Laravel\Sanctum\HasApiTokens;
 use Filament\Models\Contracts\HasName;
 use Illuminate\Notifications\Notifiable;
 use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class User extends Authenticatable implements HasName, FilamentUser
 {
@@ -76,9 +78,13 @@ class User extends Authenticatable implements HasName, FilamentUser
         return true;
     }
 
-    public function assignments(): BelongsToMany
-    {
-        return $this->belongsToMany(Role::class,  UserRole::class,'user_id', 'role_id');
-    }
+    // public function assignments(): BelongsToMany
+    // {
+    //     return $this->belongsToMany(Role::class,  UserRole::class,'user_id', 'role_id');
+    // }
 
+    public function roles(): HasMany
+    {
+        return $this->hasMany(UserRole::class);
+    }
 }

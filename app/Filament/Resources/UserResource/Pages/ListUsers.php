@@ -26,12 +26,24 @@ class ListUsers extends ListRecords
     public function getTabs(): array
     {
         return [
-            'All' => Tab::make()
-                ->modifyQueryUsing(function(Builder $query){
-                    return $query->with('assignments');
-                }),
+            // 'All' => Tab::make()
+            //     ->modifyQueryUsing(function(Builder $query){
+            //         $data = $query->with(['roles' => function($withRoles){
+            //             $withRoles->with(['assignment' => function($withAssignment){
+            //                 $withAssignment->whereNot('role_nice', 'admin');
+            //             }]);
+            //         }]);
+
+            //         return $data;
+            //     }),
             // 'REMIS' => Tab::make()
-            //     ->modifyQueryUsing(fn (Builder $query) => $query->where('user_role' , 'remis')),
+            //     ->modifyQueryUsing(function(Builder $query){
+            //         return $query->with(['roles' => function($withRoles){
+            //             $withRoles->with(['assignment' => function($withAssignment){
+            //                 $withAssignment->where('role_nice', 'remis');
+            //             }]);
+            //         }]);
+            //     }),
             // 'Proponent' => Tab::make()
             //     ->modifyQueryUsing(fn (Builder $query) => $query->where('user_role' , 'proponent')),
             // 'RIDE Director' => Tab::make()
