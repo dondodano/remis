@@ -3,6 +3,7 @@
 use App\Models\User;
 use App\Enums\UserRole;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Database\Eloquent\Builder;
 use App\Http\Controllers\GAuth\GoogleAuthController;
 use App\Filament\Resources\ProjectResource\Pages\EvaluateProject;
 
@@ -39,8 +40,15 @@ Route::prefix('admin')->group(function(){
  * Test
  */
 Route::get('/test', function(){
-    return User::with(['roles' => function($withRoles){
-        $withRoles->with('assignment');
-    }])
-    ->where('id','11')->get();
+    // return User::with(['roles' => function($withRoles){
+    //     $withRoles->with(['assignment' => function($withAssignment){
+    //         $withAssignment->whereNot('role_nice', 'planning officer');
+    //     }]);
+    // }])->get()->toArray();
+
+    return User::whereHas('roles', function(Builder $roleQuery){
+        $roleQuery->whereHas('assignment', function(Builder $assignmentsQuery){
+            $assignmentsQuery->where('role_nice', 'planning officer');
+        });
+    })->count();
 });
