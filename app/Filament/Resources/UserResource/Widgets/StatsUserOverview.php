@@ -22,26 +22,26 @@ class StatsUserOverview extends BaseWidget
 
     protected function getStats(): array
     {
-        $user = User::query();
+        // dd(
+        //     $this->getPageTableQuery()->with(['roles' => function($withRoles){
+        //             $withRoles->with(['assignment' => function($withAssignment){
+        //                 $withAssignment->where('role_nice', 'proponent');
+        //             }]);
+        //         }])->get()->toArray()
+        // );
 
-        // $proponent = $user->select('assignment_count')->with(['roles' => function($withRoles){
-        //     $withRoles->with(['assignment' => function($withAssignment){
-        //         $withAssignment->where('role_nice', 'proponent');
-        //     }])->withCount('assignment');
-        // }]);
-
-        //dd($proponent->get()->toArray());
+        $query = $this->getPageTableQuery();
 
         return [
-            Stat::make('Record Total',  $this->getPageTableQuery()->count())
+            Stat::make('Record Total',  $query->count())
                 ->chart([7, 2, 10, 3, 15, 4, 17])
                 ->color('success'),
-            // Stat::make('Users', $user->whereNot('user_role', 'admin')->whereNot('user_role', 'super')->count())
-            //     ->chart([17, 2, 10, 3, 15, 4, 17])
-            //     ->color('success'),
-            // Stat::make('Proponents',  $proponent)
-            //     ->chart([17, 2, 10, 3, 15, 4, 7])
-            //     ->color('success'),
+            Stat::make('Proponents',  '1')
+                ->chart([17, 2, 10, 3, 15, 4, 7])
+                ->color('success'),
+            Stat::make('Table Record',  $this->getPageTableRecords()->count())
+                ->chart([17, 2, 10, 3, 15, 4, 7])
+                ->color('success'),
         ];
     }
 }
