@@ -28,36 +28,70 @@ class ListUsers extends ListRecords
     public function getTabs(): array
     {
         return [
-            // 'All' => Tab::make()
-            //     ->modifyQueryUsing(function(Builder $query){
-            //         $data = $query->with(['roles' => function($withRoles){
-            //             $withRoles->with(['assignment' => function($withAssignment){
-            //                 $withAssignment->whereNot('role_nice', 'admin');
-            //             }]);
-            //         }]);
-
-            //         return $data;
-            //     }),
-            // 'REMIS' => Tab::make()
-            //     ->modifyQueryUsing(function(Builder $query){
-            //         return $query->with(['roles' => function($withRoles){
-            //             $withRoles->with(['assignment' => function($withAssignment){
-            //                 $withAssignment->where('role_nice', 'remis');
-            //             }]);
-            //         }]);
-            //     }),
-            // 'Proponent' => Tab::make()
-            //     ->modifyQueryUsing(fn (Builder $query) => $query->where('user_role' , 'proponent')),
-            // 'RIDE Director' => Tab::make()
-            //     ->modifyQueryUsing(fn (Builder $query) => $query->where('user_role' , 'ridedirector')),
-            // 'RIDE Staff' => Tab::make()
-            //     ->modifyQueryUsing(fn (Builder $query) => $query->where('user_role' , 'ridestaff')),
-            // 'Budget Officer' => Tab::make()
-            //     ->modifyQueryUsing(fn (Builder $query) => $query->where('user_role' , 'budgetofficer')),
-            // 'Planning Officer' => Tab::make()
-            //     ->modifyQueryUsing(fn (Builder $query) => $query->where('user_role' , 'planningofficer')),
-            // 'Accounting Officer' => Tab::make()
-            //     ->modifyQueryUsing(fn (Builder $query) => $query->where('user_role' , 'accountingofficer')),
+            'All' => Tab::make()
+                ->modifyQueryUsing(function(Builder $query){
+                    return $query->whereHas('roles', function(Builder $roleQuery){
+                        $roleQuery->whereHas('assignment', function(Builder $assignmentsQuery){
+                            //$assignmentsQuery->where('role_nice', 'proponent');
+                        });
+                    });
+                }),
+            'REMIS' => Tab::make()
+                ->modifyQueryUsing(function(Builder $query){
+                    return $query->whereHas('roles', function(Builder $roleQuery){
+                        $roleQuery->whereHas('assignment', function(Builder $assignmentsQuery){
+                            $assignmentsQuery->where('role_nice', 'remis');
+                        });
+                    });
+                }),
+            'Proponent' => Tab::make()
+                ->modifyQueryUsing(function(Builder $query){
+                    return $query->whereHas('roles', function(Builder $roleQuery){
+                        $roleQuery->whereHas('assignment', function(Builder $assignmentsQuery){
+                            $assignmentsQuery->where('role_nice', 'proponent');
+                        });
+                    });
+                }),
+            'R&D Dir.' => Tab::make()
+                ->modifyQueryUsing(function(Builder $query){
+                    return $query->whereHas('roles', function(Builder $roleQuery){
+                        $roleQuery->whereHas('assignment', function(Builder $assignmentsQuery){
+                            $assignmentsQuery->where('role_nice', 'research director');
+                        });
+                    });
+                }),
+            'Ext. Dir.' => Tab::make()
+                ->modifyQueryUsing(function(Builder $query){
+                    return $query->whereHas('roles', function(Builder $roleQuery){
+                        $roleQuery->whereHas('assignment', function(Builder $assignmentsQuery){
+                            $assignmentsQuery->where('role_nice', 'extension director');
+                        });
+                    });
+                }),
+            'Budget Offr.' => Tab::make()
+                ->modifyQueryUsing(function(Builder $query){
+                    return $query->whereHas('roles', function(Builder $roleQuery){
+                        $roleQuery->whereHas('assignment', function(Builder $assignmentsQuery){
+                            $assignmentsQuery->where('role_nice', 'budget officer');
+                        });
+                    });
+                }),
+            'Plan. Offr.' => Tab::make()
+                ->modifyQueryUsing(function(Builder $query){
+                    return $query->whereHas('roles', function(Builder $roleQuery){
+                        $roleQuery->whereHas('assignment', function(Builder $assignmentsQuery){
+                            $assignmentsQuery->where('role_nice', 'planning officer');
+                        });
+                    });
+                }),
+            'Acc. Offr.' => Tab::make()
+                ->modifyQueryUsing(function(Builder $query){
+                    return $query->whereHas('roles', function(Builder $roleQuery){
+                        $roleQuery->whereHas('assignment', function(Builder $assignmentsQuery){
+                            $assignmentsQuery->where('role_nice', 'accounting officer');
+                        });
+                    });
+                }),
         ];
     }
 
