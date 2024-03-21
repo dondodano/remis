@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use Auth;
 use Closure;
 use Filament\Forms;
 use App\Models\Role;
@@ -94,9 +95,9 @@ class UserResource extends Resource
 
                         TextInput::make('password')
                             ->label('Password')
-                            ->formatStateUsing(function($state, User $user){
-                                return '1234';
-                            })
+                            // ->formatStateUsing(function($state, User $user){
+                            //     return '1234';
+                            // })
                             ->hint('Alphanumeric')
                             ->hintIcon('heroicon-m-information-circle')
                             ->helperText("Choose a strong password with a mix of uppercase and lowercase letters, numbers, and special characters.")
