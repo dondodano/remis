@@ -32,7 +32,6 @@
         "laravolt/avatar": "^5.0",
         "leandrocfe/filament-apex-charts": "3.0",
         "nunomaduro/termwind": "^1.15",
-        "rawilk/filament-password-input": "^2.0",
         "saade/filament-fullcalendar": "3.0",
         "spatie/laravel-activitylog": "^4.8",
         "spatie/laravel-backup": "^8.6",

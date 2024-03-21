@@ -4,9 +4,10 @@ namespace App\Filament\Resources;
 
 use Closure;
 use Filament\Forms;
+use App\Models\Role;
 use App\Models\User;
 use Filament\Tables;
-use App\Enums\UserRole;
+use App\Models\UserRole;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
@@ -101,14 +102,20 @@ class UserResource extends Resource
                             ->required()
                             ->password()
                             ->maxLength(255),
-                        // Select::make('user_role')
-                        //     ->label('Role')
-                        //     ->helperText("Select your role from the options to provide access to the features most relevant to the user.")
-                        //     ->options(function($state){
-                        //         return UserRole::specificValues([
-                        //             'super',
-                        //         ]);
-                        //     })
+
+                        Select::make('roles')
+                            ->required()
+                            ->default('admin')
+                            ->label('Role')
+                            ->searchable()
+                            ->helperText("Select your role from the options to provide access to the features most relevant to the user.")
+                            ->options(Role::all()->pluck('role_definition', 'id') )
+                            ->multiple()
+                            ->loadingMessage('Loading roles...')
+                            ->searchingMessage('Searching roles...')
+                            ->noSearchResultsMessage('No roles found.')
+                            ->minItems(1)
+                            ->maxItems(3)
                         ]),
 
 
