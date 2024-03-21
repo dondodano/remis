@@ -21,6 +21,7 @@ use Filament\Forms\Components\Section;
 use Filament\Support\Enums\ActionSize;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Tables\Actions\ActionGroup;
@@ -186,13 +187,45 @@ class UserResource extends Resource
                 Tables\Actions\EditAction::make()
                     ->label('')->color('gray')->tooltip('Edit user')
                     //methods below can be executed when edit is on modal
-                    ->mutateFormDataUsing(function (array $data): array {
-                        $nameWithSpace = $data['first_name'].' '.$data['last_name'];
-                        $nameWithPlus = str_replace(' ', '+', $nameWithSpace);
-                        $data['avatar'] = 'https://ui-avatars.com/api/?background=random&size=128&rounded=true&bold=true&format=svg&name='.$nameWithPlus;
+                    // ->mutateFormDataUsing(function (array $data, Model $record): array {
+                    //     $nameWithSpace = $data['first_name'].' '.$data['last_name'];
+                    //     $nameWithPlus = str_replace(' ', '+', $nameWithSpace);
+                    //     $data['avatar'] = 'https://ui-avatars.com/api/?background=random&size=128&rounded=true&bold=true&format=svg&name='.$nameWithPlus;
+
+                    //     $roles = $record->whereHas('roles', function(Builder $roleQuery){
+                    //         $roleQuery->whereHas('assignment');
+                    //     });
+
+                    //     dd($roles);
+                    // })
+                    ->mutateRecordDataUsing(function (array $data): array {
+                        $userRole = User::with(['roles' => function($roleQuery){
+                            $roleQuery->whereHas('assignment');
+                        }
+                        ])->where('id', $data['id'])->get()->toArray();
+
+
+                        $data['roles'] = [];
+
+                        foreach($userRole[0]['roles'] as $roleId)
+                        {
+                            array_push($data['roles'], $roleId['role_id']);
+                        }
 
                         return $data;
-                    })->successNotification(
+                    })
+                    ->using(function(Model $record, array $data): Model{
+                        foreach($data['roles'] as $role)
+                        {
+                            UserRole::updateOrCreate(
+                                ['user_id' => $record->id, 'role_id' => $role]
+                            );
+                        }
+
+                        $record->update($data);
+                        return $record;
+                    })
+                    ->successNotification(
                         Notification::make()
                             ->success()
                             ->title('User updated')

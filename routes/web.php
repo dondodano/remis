@@ -39,6 +39,10 @@ Route::prefix('admin')->group(function(){
 /**
  * Test
  */
+Route::get('/login', function(){
+    return '<a href="/admin/login">Click here to login</a>';
+})->name('login');
+
 Route::get('/test', function(){
     // return User::with(['roles' => function($withRoles){
     //     $withRoles->with(['assignment' => function($withAssignment){
