@@ -16,6 +16,7 @@ class CreateUser extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
+
         $nameWithSpace = $data['first_name'].' '.$data['last_name'];
         $nameWithPlus = str_replace(' ', '+', $nameWithSpace);
 
@@ -34,7 +35,6 @@ class CreateUser extends CreateRecord
         {
             UserRole::create(['user_id' => $user->id, 'role_id' => $role]);
         }
-
 
         return $user;
     }

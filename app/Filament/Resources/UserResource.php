@@ -11,6 +11,7 @@ use Filament\Tables;
 use App\Models\UserRole;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Facades\Filament;
 use Filament\Resources\Resource;
 use Filament\Support\Colors\Color;
 use Filament\Forms\Components\Grid;
@@ -101,9 +102,10 @@ class UserResource extends Resource
                             ->hint('Alphanumeric')
                             ->hintIcon('heroicon-m-information-circle')
                             ->helperText("Choose a strong password with a mix of uppercase and lowercase letters, numbers, and special characters.")
-                            ->required()
+                            //->required()
                             ->password()
-                            ->maxLength(255),
+                            ->maxLength(255)
+                            ->currentPassword(),
 
                         Select::make('roles')
                             ->required()
@@ -128,33 +130,32 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                //Split::make([
-                    ImageColumn::make('avatar'),
-                    TextColumn::make('first_name')
-                        ->formatStateUsing(function($state, User $user){
-                            return $user->first_name .' '. $user->last_name;
-                        })
-                        ->label('Name')
-                        ->searchable()
-                        ->toggleable(),
-                //]),
-                    TextColumn::make('email')
-                        ->searchable()
-                        ->toggleable(),
-                    TextColumn::make('roles.assignment.role_definition')
-                        ->label('Role')
-                        ->badge()
-                        ->color(Color::Blue)
-                        ->toggleable()
-                        ->searchable(),
-                    IconColumn::make('email_verified_at')
-                        ->label('Verified?')
-                        ->toggleable()
-                        ->getStateUsing(fn ($record): bool => $record->email_verified_at !== null)
-                        ->boolean()
-                        ->trueIcon('heroicon-o-shield-check')
-                        ->falseIcon('heroicon-o-shield-exclamation')
-                        ->size(IconColumn\IconColumnSize::Medium)
+                ImageColumn::make('avatar'),
+                TextColumn::make('first_name')
+                    ->formatStateUsing(function($state, User $user){
+                        return $user->first_name .' '. $user->last_name;
+                    })
+                    ->label('Name')
+                    ->searchable()
+                    ->toggleable(),
+
+                TextColumn::make('email')
+                    ->searchable()
+                    ->toggleable(),
+                TextColumn::make('roles.assignment.role_definition')
+                    ->label('Role')
+                    ->badge()
+                    ->color(Color::Blue)
+                    ->toggleable()
+                    ->searchable(),
+                IconColumn::make('email_verified_at')
+                    ->label('Verified?')
+                    ->toggleable()
+                    ->getStateUsing(fn ($record): bool => $record->email_verified_at !== null)
+                    ->boolean()
+                    ->trueIcon('heroicon-o-shield-check')
+                    ->falseIcon('heroicon-o-shield-exclamation')
+                    ->size(IconColumn\IconColumnSize::Medium)
             ])
             ->filters([
                 TrashedFilter::make(),
@@ -188,17 +189,17 @@ class UserResource extends Resource
                 Tables\Actions\EditAction::make()
                     ->label('')->color('gray')->tooltip('Edit user')
                     //methods below can be executed when edit is on modal
-                    // ->mutateFormDataUsing(function (array $data, Model $record): array {
-                    //     $nameWithSpace = $data['first_name'].' '.$data['last_name'];
-                    //     $nameWithPlus = str_replace(' ', '+', $nameWithSpace);
-                    //     $data['avatar'] = 'https://ui-avatars.com/api/?background=random&size=128&rounded=true&bold=true&format=svg&name='.$nameWithPlus;
+                    ->mutateFormDataUsing(function (array $data, Model $record): array {
+                        $nameWithSpace = $data['first_name'].' '.$data['last_name'];
+                        $nameWithPlus = str_replace(' ', '+', $nameWithSpace);
+                        $data['avatar'] = 'https://ui-avatars.com/api/?background=random&size=128&rounded=true&bold=true&format=svg&name='.$nameWithPlus;
 
-                    //     $roles = $record->whereHas('roles', function(Builder $roleQuery){
-                    //         $roleQuery->whereHas('assignment');
-                    //     });
+                        $roles = $record->whereHas('roles', function(Builder $roleQuery){
+                            $roleQuery->whereHas('assignment');
+                        });
 
-                    //     dd($roles);
-                    // })
+                        return $data;
+                    })
                     ->mutateRecordDataUsing(function (array $data): array {
                         $userRole = User::with(['roles' => function($roleQuery){
                             $roleQuery->whereHas('assignment');
@@ -216,6 +217,9 @@ class UserResource extends Resource
                         return $data;
                     })
                     ->using(function(Model $record, array $data): Model{
+                        /**
+                         * Save data to UserRole Model
+                         */
                         foreach($data['roles'] as $role)
                         {
                             UserRole::updateOrCreate(
@@ -223,8 +227,24 @@ class UserResource extends Resource
                             );
                         }
 
-                        $record->update($data);
+
+                        $record->first_name = $data['first_name'];
+                        $record->last_name = $data['last_name'];
+                        $record->email = $data['email'];
+                        $record->avatar = $data['avatar'];
+
+                        if(array_key_exists('password', $data) && !is_null($data['password']) || array_key_exists('password', $data) && $data['password'] != null)
+                        {
+                            if (request()->hasSession() && array_key_exists('password', $data)) {
+                                request()->session()->put(['password_hash_' . Filament::getAuthGuard() => $data['password']]);
+                            }
+
+                            $record->password = $data['password'];
+                        }
+
+                        $record->save();
                         return $record;
+
                     })
                     ->successNotification(
                         Notification::make()
