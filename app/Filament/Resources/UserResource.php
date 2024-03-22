@@ -96,9 +96,7 @@ class UserResource extends Resource
 
                         TextInput::make('password')
                             ->label('Password')
-                            // ->formatStateUsing(function($state, User $user){
-                            //     return '1234';
-                            // })
+                            ->revealable(false)
                             ->hint('Alphanumeric')
                             ->hintIcon('heroicon-m-information-circle')
                             ->helperText("Choose a strong password with a mix of uppercase and lowercase letters, numbers, and special characters.")
@@ -156,6 +154,7 @@ class UserResource extends Resource
                     ->trueIcon('heroicon-o-shield-check')
                     ->falseIcon('heroicon-o-shield-exclamation')
                     ->size(IconColumn\IconColumnSize::Medium)
+                    ->tooltip('Email Verified?')
             ])
             ->filters([
                 TrashedFilter::make(),
@@ -275,7 +274,7 @@ class UserResource extends Resource
 
 
                     Tables\Actions\Action::make('disprove-verification')
-                        ->label('Disprove Verification')
+                        ->label('Disapprove')
                         ->icon('heroicon-o-shield-exclamation')
                         ->action(function(User $user): void{
 
@@ -291,8 +290,9 @@ class UserResource extends Resource
                                 ->duration(2000)
                                 ->send();
                         })->hidden(fn ($record) => is_null($record->email_verified_at) || !is_null($record->deleted_at)),
+
                     Tables\Actions\Action::make('approve-verification')
-                        ->label('Approve Verification')
+                        ->label('Approve')
                         ->icon('heroicon-o-shield-check')
                         ->action(function(User $user): void{
 

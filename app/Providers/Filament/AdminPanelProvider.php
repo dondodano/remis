@@ -17,7 +17,6 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Navigation\NavigationBuilder;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
-use Awcodes\FilamentQuickCreate\QuickCreatePlugin;
 use Brickx\MaintenanceSwitch\MaintenanceSwitchPlugin;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
@@ -78,13 +77,6 @@ class AdminPanelProvider extends PanelProvider
                 'logout' => MenuItem::make()->label('Log out'),
             ])
             ->plugins([
-                QuickCreatePlugin::make()
-                    ->includes([
-                        \App\Filament\Resources\UserResource::class,
-                        \App\Filament\Resources\ProjectResource::class,
-                    ])
-                    ->sortBy('navigation')
-                    ->slideOver(),
                 MaintenanceSwitchPlugin::make(),
             ]);
     }

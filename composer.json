@@ -9,13 +9,8 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
-        "archilex/filament-toggle-icon-column": "^3.0",
-        "awcodes/filament-quick-create": "*",
-        "awcodes/shout": "^2.0",
         "barryvdh/laravel-dompdf": "^2.0",
-        "bezhansalleh/filament-shield": "^3.1",
         "brickx/maintenance-switch": "^1.0",
-        "cjmellor/level-up": "^1.1",
         "emreyarligan/enum-concern": "^1.0",
         "filament/actions": "^3.2",
         "filament/filament": "^3.2",
@@ -30,12 +25,9 @@
         "laravel/socialite": "^5.10",
         "laravel/tinker": "^2.8",
         "laravolt/avatar": "^5.0",
-        "leandrocfe/filament-apex-charts": "3.0",
         "nunomaduro/termwind": "^1.15",
-        "saade/filament-fullcalendar": "3.0",
         "spatie/laravel-activitylog": "^4.8",
-        "spatie/laravel-backup": "^8.6",
-        "wnx/laravel-backup-restore": "^1.1"
+        "spatie/laravel-backup": "^8.6"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.12",
@@ -45,7 +37,6 @@
         "laravel/sail": "^1.18",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",
-        "pestphp/pest": "^2.34",
         "phpunit/phpunit": "^10.1",
         "spatie/laravel-ignition": "^2.0"
     },
