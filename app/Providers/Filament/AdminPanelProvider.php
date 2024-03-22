@@ -10,8 +10,8 @@ use Filament\Pages\Dashboard;
 use App\Filament\Pages\Backups;
 use Filament\Navigation\MenuItem;
 use Filament\Support\Colors\Color;
-use Filament\Pages\Auth\EditProfile;
 use Filament\Navigation\NavigationItem;
+use App\Filament\Pages\EditProfile;
 use Filament\Navigation\NavigationGroup;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Navigation\NavigationBuilder;
@@ -41,8 +41,6 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->passwordReset()
             ->emailVerification()
-            ->profile()
-            //->profile(EditProfile::class)
             ->colors([
                 'primary' => Color::rgb('rgb(16, 185, 129)'),
             ])
@@ -76,6 +74,7 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->userMenuItems([
+                'profile' => MenuItem::make()->url(fn (): string => EditProfile::getUrl()),
                 'logout' => MenuItem::make()->label('Log out'),
             ])
             ->plugins([
